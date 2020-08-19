@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import Day from './components/week-day/WeekDay'
-import Week from '../src/components/Week'
+import Week from './components/week/Week'
 
 class App extends Component {
 

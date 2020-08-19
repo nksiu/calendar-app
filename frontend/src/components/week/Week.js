@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react'
 import moment from 'moment'
-import Day from './week-day/WeekDay'
+import Day from '../week-day/WeekDay'
 import WeekWrapperSC from './week-wrapper'
 
 const Week = () => {
