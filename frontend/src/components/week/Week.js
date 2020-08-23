@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react'
 import moment from 'moment'
-import Day from '../week-day/WeekDay'
+import DayOfWeek from '../day-of-week'
 import WeekWrapperSC from './week-wrapper'
 
 const Week = () => {
@@ -8,7 +8,7 @@ const Week = () => {
 
   return (
     <WeekWrapperSC>
-        {weekDayShort.map(dayLabel => (<Day key={dayLabel} weekDay={dayLabel}/>))}
+        {weekDayShort.map(dayLabel => (<DayOfWeek key={dayLabel} weekDay={dayLabel}/>))}
     </WeekWrapperSC>
   )
 }

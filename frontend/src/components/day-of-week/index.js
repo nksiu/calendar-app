@@ -1,16 +1,16 @@
 import React, {useCallback, useState} from 'react'
-import WeekDayWrapperSC from './week-day-wrapper'
+import DayOfWeekWrapperSC from './day-of-week'
 
 const WeekDay = ({weekDay}) => {
 
   return (
-    <WeekDayWrapperSC weekDay={weekDay}>
+    <DayOfWeekWrapperSC weekDay={weekDay}>
         <div>
           <p>
           {weekDay}
           </p>
         </div>
-    </WeekDayWrapperSC>
+    </DayOfWeekWrapperSC>
   )
 }
 

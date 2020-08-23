@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const WeekDayWrapperSC = styled.div`
+const DayOfWeekWrapperSC = styled.div`
   border: 2px solid black;
   border-left: ${props => (props.weekDay === "Sun" ? "2px solid black" : "none")};
   width: 200px;
@@ -11,4 +11,4 @@ const WeekDayWrapperSC = styled.div`
   }
 `
 
-export default WeekDayWrapperSC
+export default DayOfWeekWrapperSC
