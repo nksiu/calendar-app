@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Month from './components/month'
+import WeekWrapperSC from './components/week-days/week-wrapper'
 import {getDaysInMonth, getToday, getTodayText, firstWeekDayOfMonth, getPreviousMonth, createMonthMap} from '../src/actions/helpers'
 
 class App extends Component {
@@ -24,7 +25,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>{this.state.topText}</h1>
+        <WeekWrapperSC>
+          <h1>{this.state.topText}</h1>
+        </WeekWrapperSC>
         <Month month={this.state.month}/>
       </div>
     )

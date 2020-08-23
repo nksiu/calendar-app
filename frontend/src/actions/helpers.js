@@ -19,7 +19,6 @@ export const getTodayText = () => {
 }
 
 export const firstWeekDayOfMonth = () => {
-  // const date = moment("2020-08-01").format('dddd')
   const date = moment("2020-08-01")
   const dow = date.day()
   return dow
@@ -51,7 +50,8 @@ export const createMonthMap = (daysInMonth, daysInPrevMonth, dayOfWeek) => {
     
     week.push({
       numOfDay: currentDay,
-      isPartOfCurrentMonth: partOfCurrentMonth
+      isPartOfCurrentMonth: partOfCurrentMonth,
+      isSunday: dayCounter === 0
     })
 
     currentDay++
