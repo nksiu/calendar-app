@@ -1,7 +1,7 @@
-import React, {Component, useEffect} from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import Month from './components/month'
-import {getDaysInMonth, getToday, getTodayText, firstWeekDayOfMonth, getPreviousMonth} from '../src/actions/helpers'
+import {getDaysInMonth, getToday, getTodayText, firstWeekDayOfMonth, getPreviousMonth, createMonthMap} from '../src/actions/helpers'
 
 class App extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class App extends Component {
     this.state = {
       dateToday: getToday().split('-'),
       topText: getTodayText(),
-      daysInPrevMonth: 0
+      month: []
     }
   }
 
@@ -17,14 +17,15 @@ class App extends Component {
     const daysInMonth = getDaysInMonth(this.state.dateToday[0], this.state.dateToday[1])
     const daysInPreviousMonth = getPreviousMonth(this.state.dateToday[0], this.state.dateToday[1])
     const dayOfWeek = firstWeekDayOfMonth()
-    this.setState({daysInPrevMonth: daysInPreviousMonth})
+    const monthArr = createMonthMap(daysInMonth, daysInPreviousMonth, dayOfWeek)
+    this.setState({month: monthArr})
   }
 
   render() {
     return (
       <div className="App">
         <h1>{this.state.topText}</h1>
-        <Month/>
+        <Month month={this.state.month}/>
       </div>
     )
   }

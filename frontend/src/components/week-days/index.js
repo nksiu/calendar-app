@@ -3,7 +3,7 @@ import moment from 'moment'
 import DayOfWeek from '../day-of-week'
 import WeekWrapperSC from './week-wrapper'
 
-const Week = () => {
+const WeekDays = () => {
   const weekDayShort = moment.weekdaysShort()
 
   return (
@@ -13,4 +13,4 @@ const Week = () => {
   )
 }
 
-export default Week;
+export default WeekDays;

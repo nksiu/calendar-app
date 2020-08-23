@@ -1,11 +1,13 @@
-import React, {useCallback, useState} from 'react'
-import Week from '../week'
+import React from 'react'
+import WeekDays from '../week-days'
 
-const Month = () => {
+const Month = ({month}) => {
+
+  console.log(month)
 
   return (
     <div>
-      <Week/>
+      <WeekDays/>
     </div>
   )
 }
