@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react'
-import Week from '../week/Week'
+import Week from '../week'
 
 const Month = () => {
 
