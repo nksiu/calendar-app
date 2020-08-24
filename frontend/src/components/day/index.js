@@ -9,7 +9,7 @@ const Day = ({dayInfo}) => {
     <DayWrapperSC isSunday={isSunday} isPartOfCurrentMonth={isPartOfCurrentMonth}>
       <div>
         <p>
-          {numOfDay}
+          {numOfDay ? numOfDay : ''}
         </p>
       </div>
     </DayWrapperSC>

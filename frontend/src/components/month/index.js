@@ -1,9 +1,16 @@
 import React from 'react'
+import {connect} from 'react-redux'
+
+//Helper Functions
+import * as CalendarHelpers from '../../functions/calendar-helpers'
+
+//Components
 import WeekDays from '../week-days'
 import Week from '../week'
 
-const Month = ({month}) => {
+const Month = ({calendarInfo}) => {
   //fix week key
+  const month = CalendarHelpers.createMonthMap(calendarInfo.currentMonth)
   return (
     <div>
       <WeekDays/>
@@ -14,4 +21,8 @@ const Month = ({month}) => {
   )
 }
 
-export default Month;
+const mapStateToProps = state => ({
+  calendarInfo: state.calendarInfo
+})
+
+export default connect(mapStateToProps, null)(Month);
