@@ -2,10 +2,13 @@ import {INIT_CALENDAR, NEXT_MONTH, PREV_MONTH, NEXT_YEAR} from './types'
 import * as CalendarHelpers from '../functions/calendar-helpers'
 
 export const initCalendarInfo = () => dispatch => {
+  const firstDate = CalendarHelpers.getCurrentMonthFirstDay()
   const data = {
     currentDate: CalendarHelpers.getTodayDate(),
     currentMonth: CalendarHelpers.getCurrentMonth(),
-    navigatedMonth: CalendarHelpers.getCurrentMonthFirstDay()
+    navigatedMonth: firstDate,
+    initNextMonth: CalendarHelpers.addOneMonth(firstDate),
+    initPrevMonth: CalendarHelpers.subtractOneMonth(firstDate)
   }
   dispatch({type: INIT_CALENDAR, payload: data})
 }

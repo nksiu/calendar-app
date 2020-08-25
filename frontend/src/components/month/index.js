@@ -10,7 +10,7 @@ import WeekDays from '../week-days'
 import Week from '../week'
 
 const Month = ({calendarInfo}) => {
-  const month = CalendarHelpers.createMonthMap(calendarInfo.currentMonth)
+  const month = CalendarHelpers.createMonthMap(calendarInfo.currentMonth, calendarInfo.prevMonth, calendarInfo.nextMonth, calendarInfo.currentDate)
   
   return (
     <div>

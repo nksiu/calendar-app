@@ -3,7 +3,9 @@ import {INIT_CALENDAR, NEXT_MONTH, PREV_MONTH, NEXT_YEAR, PREV_YEAR} from '../ac
 const initialState = {
   currentDate: null,
   currentMonth: null,
-  navigatedMonth: null
+  navigatedMonth: null,
+  initPrevMonth: null,
+  initNextMonth: null
 }
 
 export default function(state = initialState, action) {
@@ -13,7 +15,9 @@ export default function(state = initialState, action) {
         ...state,
         currentDate: action.payload.currentDate,
         currentMonth: action.payload.currentMonth,
-        navigatedMonth: action.payload.navigatedMonth
+        navigatedMonth: action.payload.navigatedMonth,
+        initPrevMonth: action.payload.initPrevMonth,
+        initNextMonth: action.payload.initNextMonth
       }
     case PREV_MONTH:
     case NEXT_MONTH:
