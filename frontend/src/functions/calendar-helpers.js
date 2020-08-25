@@ -66,6 +66,9 @@ export const createMonthMap = (yearAndMonth) => {
       partOfCurrentMonth = false
     }
     if (dayCounter === 7) {
+      if(!week[0].isPartOfCurrentMonth && month.length) {
+        return month
+      }
       month.push(week)
       week = []
       dayCounter = 0
