@@ -5,6 +5,7 @@ const Day = ({dayInfo}) => {
 
   const screenWidth = window.innerWidth
   const {numOfDay, isSunday, isPartOfCurrentMonth} = dayInfo
+  
   return (
     <DayWrapperSC isSunday={isSunday} isPartOfCurrentMonth={isPartOfCurrentMonth}>
       <div>

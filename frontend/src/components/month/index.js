@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import { v4 as uuidv4 } from 'uuid'
 
 //Helper Functions
 import * as CalendarHelpers from '../../functions/calendar-helpers'
@@ -9,13 +10,13 @@ import WeekDays from '../week-days'
 import Week from '../week'
 
 const Month = ({calendarInfo}) => {
-  //fix week key
   const month = CalendarHelpers.createMonthMap(calendarInfo.currentMonth)
+  
   return (
     <div>
       <WeekDays/>
       {
-        month.map(week => (<Week key={week[0].numOfDay} week={week}/>))
+        month.map(week => (<Week key={uuidv4()} week={week}/>))
       }
     </div>
   )
