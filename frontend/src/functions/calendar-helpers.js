@@ -96,6 +96,6 @@ export const createMonthMap = (yearAndMonth, prevMonth, nextMonth, currentDate) 
     currentDay++
     dayCounter++
   }
-  console.log(month)
+
   return month
 }

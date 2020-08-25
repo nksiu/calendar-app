@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react'
+import React from 'react'
 import DayWrapperSC from './day-wrapper-sc'
 
 const Day = ({dayInfo}) => {

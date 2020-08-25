@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react'
+import React from 'react'
 import moment from 'moment'
 import DayOfWeek from '../day-of-week'
 import WeekWrapperSC from './week-wrapper'

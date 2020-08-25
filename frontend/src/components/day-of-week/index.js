@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react'
+import React from 'react'
 import DayOfWeekWrapperSC from './day-of-week-sc'
 
 const WeekDay = ({weekDay}) => {
