@@ -11,10 +11,12 @@ import HeaderWrapperSC from './header-wrapper-sc'
 import IconButton from '@material-ui/core/IconButton'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
 import ArrowRightIcon from '@material-ui/icons/ArrowRight'
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 
 //Actions
 import * as CalendarHelpers from './functions/calendar-helpers'
-import {initCalendarInfo, goNextMonth, goPrevMonth} from './actions/calendarActions'
+import {initCalendarInfo, goNextMonth, goPrevMonth, goNextYear, goPrevYear} from './actions/calendarActions'
 
 class App extends Component {
   constructor(props) {
@@ -45,6 +47,11 @@ class App extends Component {
     else if(direction === 'left') {
       store.dispatch(goPrevMonth())
     }
+    else if(direction === 'right-year') {
+      store.dispatch(goNextYear())
+    }else {
+      store.dispatch(goPrevYear())
+    }
 
     this.changeTopText()
   }
@@ -54,12 +61,18 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <HeaderWrapperSC>
+            <IconButton className='prev-year' aria-label='prev-year' size='medium' onClick={() => { this.handleSubmit('left-year') }}>
+              <ArrowBackIosIcon fontSize='large' />
+            </IconButton>
             <IconButton className='prev-month' aria-label='prev-month' size='medium' onClick={() => { this.handleSubmit('left') }}>
               <ArrowLeftIcon fontSize='large' />
             </IconButton>
             <h1>{this.state.topText}</h1>
             <IconButton className='next-month' aria-label='next-month' size='medium' onClick={() => { this.handleSubmit('right') }}>
               <ArrowRightIcon fontSize='large' />
+            </IconButton>
+            <IconButton className='next-year' aria-label='next-year' size='medium' onClick={() => { this.handleSubmit('right-year') }}>
+              <ArrowForwardIosIcon fontSize='large' />
             </IconButton>
           </HeaderWrapperSC>
           <Month/>

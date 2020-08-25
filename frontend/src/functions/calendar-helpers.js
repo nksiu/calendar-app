@@ -30,6 +30,14 @@ export const subtractOneMonth = (date) => {
   return moment(date).subtract(1, 'months').format('YYYY-MM-DD')
 }
 
+export const addOneYear = (date) => {
+  return moment(date).add(1, 'years').format('YYYY-MM-DD')
+}
+
+export const subtractOneYear = (date) => {
+  return moment(date).subtract(1, 'years').format('YYYY-MM-DD')
+}
+
 const getPreviousMonth = (yearAndMonth) => {
   return moment(yearAndMonth, 'YYYY-MM').subtract(1, 'months').daysInMonth()
 }

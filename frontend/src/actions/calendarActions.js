@@ -1,4 +1,4 @@
-import {INIT_CALENDAR, NEXT_MONTH, PREV_MONTH} from './types'
+import {INIT_CALENDAR, NEXT_MONTH, PREV_MONTH, NEXT_YEAR} from './types'
 import * as CalendarHelpers from '../functions/calendar-helpers'
 
 export const initCalendarInfo = () => dispatch => {
@@ -32,4 +32,28 @@ export const goPrevMonth = () => (dispatch, getState) => {
   }
 
   dispatch({type: PREV_MONTH, payload: data})
+}
+
+export const goNextYear = () => (dispatch , getState) => {
+  const {calendarInfo} = getState()
+  const date = CalendarHelpers.addOneYear(calendarInfo.navigatedMonth)
+  const yearAndMonth = date.split('-')
+  const data = {
+    navigatedMonth: date,
+    currentMonth: `${yearAndMonth[0]}-${yearAndMonth[1]}`
+  }
+
+  dispatch({type: NEXT_YEAR, payload: data})
+}
+
+export const goPrevYear = () => (dispatch , getState) => {
+  const {calendarInfo} = getState()
+  const date = CalendarHelpers.subtractOneYear(calendarInfo.navigatedMonth)
+  const yearAndMonth = date.split('-')
+  const data = {
+    navigatedMonth: date,
+    currentMonth: `${yearAndMonth[0]}-${yearAndMonth[1]}`
+  }
+
+  dispatch({type: NEXT_YEAR, payload: data})
 }
