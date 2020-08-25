@@ -22,11 +22,22 @@ const getDaysInMonth = (yearAndMonth) => {
   return moment(yearAndMonth, 'YYYY-MM').daysInMonth()
 }
 
+export const addOneMonth = (date) => {
+  return moment(date).add(1, 'months').format('YYYY-MM-DD')
+}
+
+export const subtractOneMonth = (date) => {
+  return moment(date).subtract(1, 'months').format('YYYY-MM-DD')
+}
+
 const getPreviousMonth = (yearAndMonth) => {
   return moment(yearAndMonth, 'YYYY-MM').subtract(1, 'months').daysInMonth()
 }
 
 const firstWeekDayOfMonth = (yearAndMonth) => {
+  if(!yearAndMonth) {
+    return 0
+  }
   const date = moment(`${yearAndMonth}-01`)
   const dow = date.day()
   return dow

@@ -1,8 +1,9 @@
-import {INIT_CALENDAR} from '../actions/types'
+import {INIT_CALENDAR, NEXT_MONTH, PREV_MONTH} from '../actions/types'
 
 const initialState = {
   currentDate: null,
-  currentMonth: null
+  currentMonth: null,
+  navigatedMonth: null
 }
 
 export default function(state = initialState, action) {
@@ -11,7 +12,15 @@ export default function(state = initialState, action) {
       return {
         ...state,
         currentDate: action.payload.currentDate,
-        currentMonth: action.payload.currentMonth
+        currentMonth: action.payload.currentMonth,
+        navigatedMonth: action.payload.navigatedMonth
+      }
+    case PREV_MONTH:
+    case NEXT_MONTH:
+      return {
+        ...state,
+        currentMonth: action.payload.currentMonth,
+        navigatedMonth: action.payload.navigatedMonth
       }
     default:
       return state
