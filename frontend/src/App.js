@@ -7,7 +7,7 @@ import store from './store'
 
 //Components
 import Month from './components/month'
-import WeekWrapperSC from './components/week-days/week-wrapper'
+import HeaderWrapperSC from './header-wrapper-sc'
 import IconButton from '@material-ui/core/IconButton'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
 import ArrowRightIcon from '@material-ui/icons/ArrowRight'
@@ -53,15 +53,15 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App">
-          <WeekWrapperSC>
-            <IconButton aria-label='prev-month' size='medium' onClick={() => { this.handleSubmit('left') }}>
+          <HeaderWrapperSC>
+            <IconButton className='prev-month' aria-label='prev-month' size='medium' onClick={() => { this.handleSubmit('left') }}>
               <ArrowLeftIcon fontSize='large' />
             </IconButton>
             <h1>{this.state.topText}</h1>
-            <IconButton aria-label='next-month' size='medium' onClick={() => { this.handleSubmit('right') }}>
+            <IconButton className='next-month' aria-label='next-month' size='medium' onClick={() => { this.handleSubmit('right') }}>
               <ArrowRightIcon fontSize='large' />
             </IconButton>
-          </WeekWrapperSC>
+          </HeaderWrapperSC>
           <Month/>
         </div>
       </Provider>
