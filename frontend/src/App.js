@@ -7,13 +7,16 @@ import store from './store'
 
 //Components
 import Month from './components/month'
-import HeaderWrapperSC from './styled-wrapper/header-wrapper-sc'
 import IconButton from '@material-ui/core/IconButton'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
 import ArrowRightIcon from '@material-ui/icons/ArrowRight'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import Options from './components/options'
+
+//Styling
+import HeaderWrapperSC from './styled-wrapper/header-wrapper-sc'
+import CalendarLayoutWrapperSC from './styled-wrapper/calendar-layout-wrapper'
 
 //Actions
 import * as CalendarHelpers from './functions/calendar-helpers'
@@ -61,6 +64,9 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App">
+          
+        <CalendarLayoutWrapperSC>
+          <Options/>
           <HeaderWrapperSC>
             <IconButton className='prev-year' aria-label='prev-year' size='medium' onClick={() => { this.handleSubmit('left-year') }}>
               <ArrowBackIosIcon fontSize='large' />
@@ -76,8 +82,10 @@ class App extends Component {
               <ArrowForwardIosIcon fontSize='large' />
             </IconButton>
           </HeaderWrapperSC>
-          <Options/>
-          <Month/>
+        </CalendarLayoutWrapperSC>
+
+        <Month/>
+
         </div>
       </Provider>
     )

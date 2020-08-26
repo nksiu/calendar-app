@@ -18,8 +18,10 @@ const Options = () => {
     setAnchorEl(null);
   }
 
+  const buttonSize = 25;
+
   return (
-    <div>
+    <div className='options-menu'>
       <IconButton className='menu-button' aria-label='menu-button' onClick={handleClick}>
         <MenuIcon style={{fontSize: 40 }}/>
       </IconButton>
@@ -39,10 +41,10 @@ const Options = () => {
       >
         <OptionWrapperSC>
           <IconButton className='add-button' aria-label='add-button'>
-            <AddIcon style={{fontSize: 20 }}/>
+            <AddIcon style={{fontSize: buttonSize}}/>
           </IconButton>
           <IconButton className='settings' aria-label='settings'>
-            <SettingsIcon style={{fontSize: 20}}/>
+            <SettingsIcon style={{fontSize: buttonSize}}/>
           </IconButton>
         </OptionWrapperSC>
       </Popover>
