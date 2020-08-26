@@ -18,7 +18,9 @@ router.post('/', (req, res) => {
     appointment_author: req.body.appointmentAuthor,
     appointment_name: req.body.appointmentName,
     start_date: req.body.startDate,
-    end_date: req.body.endDate
+    end_date: req.body.endDate,
+    start_time: req.body.startTime,
+    end_time: req.body.endTime
   })
 
   newAppointment.save()

@@ -7,12 +7,13 @@ import store from './store'
 
 //Components
 import Month from './components/month'
-import HeaderWrapperSC from './header-wrapper-sc'
+import HeaderWrapperSC from './styled-wrapper/header-wrapper-sc'
 import IconButton from '@material-ui/core/IconButton'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
 import ArrowRightIcon from '@material-ui/icons/ArrowRight'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+import Options from './components/options'
 
 //Actions
 import * as CalendarHelpers from './functions/calendar-helpers'
@@ -75,6 +76,7 @@ class App extends Component {
               <ArrowForwardIosIcon fontSize='large' />
             </IconButton>
           </HeaderWrapperSC>
+          <Options/>
           <Month/>
         </div>
       </Provider>

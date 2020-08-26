@@ -1,5 +1,6 @@
 import React from 'react'
 import DayWrapperSC from './day-wrapper-sc'
+import Appointment from '../appointment'
 
 const Day = ({dayInfo}) => {
 
