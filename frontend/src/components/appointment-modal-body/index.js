@@ -15,7 +15,7 @@ import AppointmentModalBodyWrapperSC from './appointment-modal-body-sc'
 import WeekWrapperSC from '../week-days/week-wrapper'
 import AlertWrapperSC from './alert-wrapper-sc'
 
-const AppointmentModalBody = () => {
+const AppointmentModalBody = ({handleModal}) => {
   const currentDate = CalendarHelpers.getTodayDate()
   const currentTime = CalendarHelpers.getCurrentTime()
 
@@ -32,26 +32,28 @@ const AppointmentModalBody = () => {
   const [alertText, setAlertText] = useState('')
 
   const handleStartDateChange = (date) => {
-    setSelectedStartDate(date)
     if (date){
+      setSelectedStartDate(date.toDate())
       setIsValidStartDate(date.isValid())
     }else{
+      setSelectedStartDate(date)
       setIsValidStartDate(false)
     }
   }
 
   const handleEndDateChange = (date) => {
-    setSelectedEndDate(date)
     if (date) {
+      setSelectedEndDate(date.toDate())
       setIsValidEndDate(date.isValid())
     }else{
+      setSelectedEndDate(date)
       setIsValidEndDate(false)
     }
   }
 
   const handleClick = () => {
-    console.log(selectedStartDate)
-    console.log(selectedEndDate)
+    // console.log(selectedStartDate)
+    // console.log(selectedEndDate)
 
     if (!title) {
       setAlert(true)
@@ -65,7 +67,10 @@ const AppointmentModalBody = () => {
     }
 
     else if (isValidStartDate && isValidEndDate) {
+      handleModal(false)
       console.log('valid format reached')
+      console.log(selectedStartDate)
+      console.log(selectedEndDate)
     }else{
       setAlert(true)
       setAlertText('Invalid date or time provided')
