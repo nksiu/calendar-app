@@ -2,9 +2,9 @@ import React, {useState} from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Popover from '@material-ui/core/Popover'
-import AddIcon from '@material-ui/icons/Add'
 import SettingsIcon from '@material-ui/icons/Settings'
 import OptionWrapperSC from './option-wrapper-sc'
+import AppointmentModal from '../appointment-modal'
 
 const Options = () => {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -12,13 +12,13 @@ const Options = () => {
   const id = open ? 'simple-popover' : undefined
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
-    setAnchorEl(null);
+    setAnchorEl(null)
   }
 
-  const buttonSize = 25;
+  const buttonSize = 25
 
   return (
     <div className='options-menu'>
@@ -40,9 +40,7 @@ const Options = () => {
         }}
       >
         <OptionWrapperSC>
-          <IconButton className='add-button' aria-label='add-button'>
-            <AddIcon style={{fontSize: buttonSize}}/>
-          </IconButton>
+          <AppointmentModal />
           <IconButton className='settings' aria-label='settings'>
             <SettingsIcon style={{fontSize: buttonSize}}/>
           </IconButton>

@@ -2,6 +2,10 @@ import moment from 'moment'
 
 const numOfDaysInCalendar = 42
 
+export const getCurrentTime = () => {
+  return moment().format('HH:mm')
+}
+
 export const getTodayDate = () => {
   return moment().format('YYYY-MM-DD')
 }
