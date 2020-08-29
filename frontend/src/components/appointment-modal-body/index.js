@@ -19,8 +19,7 @@ const AppointmentModalBody = ({handleModal}) => {
   const currentDate = CalendarHelpers.getTodayDate()
   const currentTime = CalendarHelpers.getCurrentTime()
 
-  const [title, setTitle] = useState()
-  const [titleError, setTitleError] = useState(false)
+  const [title, setTitle] = useState({text: '', error: false})
 
   const [selectedStartDate, setSelectedStartDate] = useState(new Date(`${currentDate}T${currentTime}`))
   const [selectedEndDate, setSelectedEndDate] = useState(new Date(`${currentDate}T${currentTime}`))
@@ -28,8 +27,7 @@ const AppointmentModalBody = ({handleModal}) => {
   const [isValidStartDate, setIsValidStartDate] = useState(true)
   const [isValidEndDate, setIsValidEndDate] = useState(true)
 
-  const [needsAlert, setAlert] = useState(false)
-  const [alertText, setAlertText] = useState('')
+  const [alert, setAlert] = useState({text: '', severity: '', shouldShow: false})
 
   const handleStartDateChange = (date) => {
     if (date){
@@ -55,15 +53,13 @@ const AppointmentModalBody = ({handleModal}) => {
     // console.log(selectedStartDate)
     // console.log(selectedEndDate)
 
-    if (!title) {
-      setAlert(true)
-      setAlertText('No title added')
-      setTitleError(true)
+    if (!title.text) {
+      setAlert({text: 'No title added', severity: 'error', shouldShow: true})
+      setTitle({...title, error: true})
     }
 
     else if (JSON.stringify(selectedEndDate) === JSON.stringify(selectedStartDate)) {
-      setAlert(true)
-      setAlertText('The date and time are the same')
+      setAlert({text: 'The date and time are the same', severity: 'error', shouldShow: true})
     }
 
     else if (isValidStartDate && isValidEndDate) {
@@ -72,29 +68,27 @@ const AppointmentModalBody = ({handleModal}) => {
       console.log(selectedStartDate)
       console.log(selectedEndDate)
     }else{
-      setAlert(true)
-      setAlertText('Invalid date or time provided')
+      setAlert({text: 'Invalid date or time provided', severity: 'error', shouldShow: true})
     }
 
     setTimeout(() => {
-      setAlert(false)
+      setAlert({...alert, shouldShow: false})
     }, 3000)
 
     clearTimeout()
   }
 
   const handleTextChange = (e) => {
-    setTitle(e.target.value)
-    setTitleError(false)
+    setTitle({text: e.target.value, error: false})
   }
 
   return (
     <div>
       {
-        needsAlert ?
+        alert.shouldShow ?
         <AlertWrapperSC>
-          <Alert severity='error' className='alert'>
-            {alertText}
+          <Alert severity={alert.severity} className='alert'>
+            {alert.text}
           </Alert>
         </AlertWrapperSC>
         :
@@ -102,7 +96,7 @@ const AppointmentModalBody = ({handleModal}) => {
       }
     <AppointmentModalBodyWrapperSC>
       <form autoComplete='off' noValidate>
-        <TextField id='standard-basic' label='Add Title' error={titleError} fullWidth onChange={handleTextChange}/>
+        <TextField id='standard-basic' label='Add Title' error={title.error} fullWidth onChange={handleTextChange}/>
         <MuiPickersUtilsProvider utils={MomentUtils}>
 
           <WeekWrapperSC>

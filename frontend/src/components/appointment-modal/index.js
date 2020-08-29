@@ -5,11 +5,12 @@ import AddIcon from '@material-ui/icons/Add'
 import Modal from '@material-ui/core/Modal'
 
 
-const AppointmentModal = () => {
+const AppointmentModal = ({handleButtonClose}) => {
   const [open, setOpen] = useState(false)
 
-  const handleModalState = (value) =>{
+  const handleModalState = (value) => {
     setOpen(value)
+    handleButtonClose(null)
   }
 
   const handleClose = () => {

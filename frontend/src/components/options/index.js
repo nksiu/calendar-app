@@ -11,6 +11,10 @@ const Options = () => {
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popover' : undefined
 
+  const handleButtonClose = (value) => {
+    setAnchorEl(value)
+  }
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
@@ -40,7 +44,7 @@ const Options = () => {
         }}
       >
         <OptionWrapperSC>
-          <AppointmentModal />
+          <AppointmentModal handleButtonClose={handleButtonClose}/>
           <IconButton className='settings' aria-label='settings'>
             <SettingsIcon style={{fontSize: buttonSize}}/>
           </IconButton>
