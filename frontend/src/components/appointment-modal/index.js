@@ -5,7 +5,7 @@ import AddIcon from '@material-ui/icons/Add'
 import Modal from '@material-ui/core/Modal'
 
 
-const AppointmentModal = ({handleButtonClose}) => {
+const AppointmentModal = ({handleButtonClose, handleAlert}) => {
   const [open, setOpen] = useState(false)
 
   const handleModalState = (value) => {
@@ -34,7 +34,7 @@ const AppointmentModal = ({handleButtonClose}) => {
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'
       >
-        <AppointmentModalBody handleModal={handleModalState}/>
+        <AppointmentModalBody handleModal={handleModalState} handleAlert={handleAlert}/>
       </Modal>
     </div>
   )

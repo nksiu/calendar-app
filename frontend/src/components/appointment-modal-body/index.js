@@ -15,7 +15,7 @@ import AppointmentModalBodyWrapperSC from './appointment-modal-body-sc'
 import WeekWrapperSC from '../week-days/week-wrapper'
 import AlertWrapperSC from './alert-wrapper-sc'
 
-const AppointmentModalBody = ({handleModal}) => {
+const AppointmentModalBody = ({handleModal, handleAlert}) => {
   const currentDate = CalendarHelpers.getTodayDate()
   const currentTime = CalendarHelpers.getCurrentTime()
 
@@ -64,6 +64,7 @@ const AppointmentModalBody = ({handleModal}) => {
 
     else if (isValidStartDate && isValidEndDate) {
       handleModal(false)
+      handleAlert({text: 'Successfully created appointment', severity: 'success', shouldShow: true})
       console.log('valid format reached')
       console.log(selectedStartDate)
       console.log(selectedEndDate)

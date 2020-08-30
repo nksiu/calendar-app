@@ -5,6 +5,9 @@ import './App.css';
 import {Provider} from 'react-redux'
 import store from './store'
 
+import {Alert} from '@material-ui/lab'
+import AlertWrapperSC from './components/appointment-modal-body/alert-wrapper-sc'
+
 //Components
 import Month from './components/month'
 import IconButton from '@material-ui/core/IconButton'
@@ -26,8 +29,11 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      topText: ''
+      topText: '',
+      alert: {text: '', severity: '', shouldShow: false}
     }
+
+    this.handleAlert = this.handleAlert.bind(this)
   }
 
   componentDidMount() {
@@ -60,13 +66,20 @@ class App extends Component {
     this.changeTopText()
   }
 
+  handleAlert(values) {
+    this.setState({alert: values})
+
+    setTimeout(() => {
+      this.setState({alert: {...values, shouldShow: false}})
+    }, 3000)
+  }
+
   render() {
     return (
       <Provider store={store}>
         <div className="App">
-          
         <CalendarLayoutWrapperSC>
-          <Options/>
+          <Options handleAlert={this.handleAlert}/>
           <HeaderWrapperSC>
             <IconButton className='prev-year' aria-label='prev-year' size='medium' onClick={() => { this.handleSubmit('left-year') }}>
               <ArrowBackIosIcon fontSize='large' />
@@ -83,6 +96,16 @@ class App extends Component {
             </IconButton>
           </HeaderWrapperSC>
         </CalendarLayoutWrapperSC>
+        {
+          this.state.alert.shouldShow ?
+            <AlertWrapperSC>
+              <Alert severity={this.state.alert.severity}>
+                {this.state.alert.text}
+              </Alert>
+            </AlertWrapperSC>
+          :
+            null
+        }
 
         <Month/>
 

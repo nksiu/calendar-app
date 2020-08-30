@@ -6,7 +6,7 @@ import SettingsIcon from '@material-ui/icons/Settings'
 import OptionWrapperSC from './option-wrapper-sc'
 import AppointmentModal from '../appointment-modal'
 
-const Options = () => {
+const Options = ({handleAlert}) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popover' : undefined
@@ -44,7 +44,7 @@ const Options = () => {
         }}
       >
         <OptionWrapperSC>
-          <AppointmentModal handleButtonClose={handleButtonClose}/>
+          <AppointmentModal handleButtonClose={handleButtonClose} handleAlert={handleAlert}/>
           <IconButton className='settings' aria-label='settings'>
             <SettingsIcon style={{fontSize: buttonSize}}/>
           </IconButton>
