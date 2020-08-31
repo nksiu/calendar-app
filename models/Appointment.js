@@ -10,9 +10,6 @@ const AppointmentSchema = new Schema({
     type: String,
     required: true
   },
-  appointment_comments: {
-    type: String
-  },
   start_date: {
     type: Date,
     default: Date.now,

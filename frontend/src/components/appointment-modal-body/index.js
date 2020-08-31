@@ -1,6 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useReducer} from 'react'
+import {connect} from 'react-redux'
+
+import {addAppointment} from '../../actions/appointmentActions'
+
+//Components
 import TextField from '@material-ui/core/TextField'
-import * as CalendarHelpers from '../../functions/calendar-helpers'
 import {
   KeyboardTimePicker,
   KeyboardDatePicker,
@@ -15,7 +19,10 @@ import AppointmentModalBodyWrapperSC from './appointment-modal-body-sc'
 import WeekWrapperSC from '../week-days/week-wrapper'
 import AlertWrapperSC from './alert-wrapper-sc'
 
-const AppointmentModalBody = ({handleModal, handleAlert}) => {
+//Helper Functions
+import * as CalendarHelpers from '../../functions/calendar-helpers'
+
+const AppointmentModalBody = ({handleModal, handleAlert, appointment, addAppointment}) => {
   const currentDate = CalendarHelpers.getTodayDate()
   const currentTime = CalendarHelpers.getCurrentTime()
 
@@ -63,11 +70,18 @@ const AppointmentModalBody = ({handleModal, handleAlert}) => {
     }
 
     else if (isValidStartDate && isValidEndDate) {
+      const newAppointment = {
+        appointmentAuthor: 'default',
+        appointmentName: title.text,
+        startDate: selectedStartDate,
+        endDate: selectedEndDate
+      }
+      addAppointment(newAppointment)
       handleModal(false)
       handleAlert({text: 'Successfully created appointment', severity: 'success', shouldShow: true})
-      console.log('valid format reached')
-      console.log(selectedStartDate)
-      console.log(selectedEndDate)
+      // console.log('valid format reached')
+      // console.log(selectedStartDate)
+      // console.log(selectedEndDate)
     }else{
       setAlert({text: 'Invalid date or time provided', severity: 'error', shouldShow: true})
     }
@@ -167,4 +181,18 @@ const AppointmentModalBody = ({handleModal, handleAlert}) => {
   )
 }
 
-export default AppointmentModalBody
+const mapStateToProps = state => ({
+  appointment: state.appointment
+})
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     addAppointment: newAppointment => dispatch(addAppointment(newAppointment))
+//   }
+// }
+
+// const actionCreators = {
+//   addAppointment
+// }
+
+export default connect(mapStateToProps, {addAppointment})(AppointmentModalBody)
