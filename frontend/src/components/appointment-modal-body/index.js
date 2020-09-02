@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useReducer} from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 
 import {addAppointment} from '../../actions/appointmentActions'
@@ -56,17 +56,24 @@ const AppointmentModalBody = ({handleModal, handleAlert, appointment, addAppoint
     }
   }
 
-  const handleClick = () => {
-    // console.log(selectedStartDate)
-    // console.log(selectedEndDate)
+  const fadeAlert = () => {
+    setTimeout(() => {
+      setAlert({...alert, shouldShow: false})
+    }, 3000)
 
+    clearTimeout()
+  }
+
+  const handleClick = () => {
     if (!title.text) {
       setAlert({text: 'No title added', severity: 'error', shouldShow: true})
       setTitle({...title, error: true})
+      fadeAlert()
     }
 
     else if (JSON.stringify(selectedEndDate) === JSON.stringify(selectedStartDate)) {
       setAlert({text: 'The date and time are the same', severity: 'error', shouldShow: true})
+      fadeAlert()
     }
 
     else if (isValidStartDate && isValidEndDate) {
@@ -79,18 +86,10 @@ const AppointmentModalBody = ({handleModal, handleAlert, appointment, addAppoint
       addAppointment(newAppointment)
       handleModal(false)
       handleAlert({text: 'Successfully created appointment', severity: 'success', shouldShow: true})
-      // console.log('valid format reached')
-      // console.log(selectedStartDate)
-      // console.log(selectedEndDate)
     }else{
       setAlert({text: 'Invalid date or time provided', severity: 'error', shouldShow: true})
+      fadeAlert()
     }
-
-    setTimeout(() => {
-      setAlert({...alert, shouldShow: false})
-    }, 3000)
-
-    clearTimeout()
   }
 
   const handleTextChange = (e) => {
@@ -184,15 +183,5 @@ const AppointmentModalBody = ({handleModal, handleAlert, appointment, addAppoint
 const mapStateToProps = state => ({
   appointment: state.appointment
 })
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     addAppointment: newAppointment => dispatch(addAppointment(newAppointment))
-//   }
-// }
-
-// const actionCreators = {
-//   addAppointment
-// }
 
 export default connect(mapStateToProps, {addAppointment})(AppointmentModalBody)
