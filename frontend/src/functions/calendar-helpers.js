@@ -56,7 +56,7 @@ const firstWeekDayOfMonth = (yearAndMonth) => {
 }
 
 const zeroToCurrentDate = (currentDay) => {
-  if (currentDay.toString().length == 1) {
+  if (currentDay.toString().length === 1) {
     return '0' + currentDay
   }
 
