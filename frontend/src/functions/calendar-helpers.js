@@ -55,6 +55,14 @@ const firstWeekDayOfMonth = (yearAndMonth) => {
   return dow
 }
 
+const zeroToCurrentDate = (currentDay) => {
+  if (currentDay.toString().length == 1) {
+    return '0' + currentDay
+  }
+
+  return currentDay
+}
+
 export const createMonthMap = (yearAndMonth, prevMonth, nextMonth, currentDate) => {
   const daysInMonth = getDaysInMonth(yearAndMonth)
   const daysInPrevMonth = getPreviousMonth(yearAndMonth)
@@ -88,13 +96,13 @@ export const createMonthMap = (yearAndMonth, prevMonth, nextMonth, currentDate) 
       week = []
       dayCounter = 0
     }
-    
+
     week.push({
       numOfDay: currentDay,
       isPartOfCurrentMonth: partOfCurrentMonth,
       isSunday: dayCounter === 0,
-      date: date && `${date[0]}-${date[1]}-${currentDay}`,
-      isToday: currentDate === (date ? `${date[0]}-${date[1]}-${currentDay}` : null)
+      date: `${date[0]}-${date[1]}-${zeroToCurrentDate(currentDay)}`,
+      isToday: currentDate === `${date[0]}-${date[1]}-${zeroToCurrentDate(currentDay)}`
     })
 
     currentDay++

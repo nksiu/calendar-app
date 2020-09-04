@@ -23,7 +23,7 @@ import CalendarLayoutWrapperSC from './styled-wrapper/calendar-layout-wrapper'
 
 //Actions
 import * as CalendarHelpers from './functions/calendar-helpers'
-import {initCalendarInfo, goNextMonth, goPrevMonth, goNextYear, goPrevYear} from './actions/calendarActions'
+import {goNextMonth, goPrevMonth, goNextYear, goPrevYear} from './actions/calendarActions'
 
 class App extends Component {
   constructor(props) {
@@ -37,7 +37,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    store.dispatch(initCalendarInfo())
     const {calendarInfo} = store.getState()
     this.setState({topText: CalendarHelpers.getTodayText(calendarInfo.currentMonth)})
   }

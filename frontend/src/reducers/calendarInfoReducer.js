@@ -1,24 +1,18 @@
-import {INIT_CALENDAR, NEXT_MONTH, PREV_MONTH, NEXT_YEAR, PREV_YEAR} from '../actions/types'
+import {NEXT_MONTH, PREV_MONTH, NEXT_YEAR, PREV_YEAR} from '../actions/types'
+import * as CalendarHelpers from '../functions/calendar-helpers'
+
+const firstDate = CalendarHelpers.getCurrentMonthFirstDay()
 
 const initialState = {
-  currentDate: null,
-  currentMonth: null,
-  navigatedMonth: null,
-  initPrevMonth: null,
-  initNextMonth: null
+  currentDate: CalendarHelpers.getTodayDate(),
+  currentMonth: CalendarHelpers.getCurrentMonth(),
+  navigatedMonth: firstDate,
+  initPrevMonth: CalendarHelpers.subtractOneMonth(firstDate),
+  initNextMonth: CalendarHelpers.addOneMonth(firstDate)
 }
 
 export default function(state = initialState, action) {
   switch(action.type){
-    case INIT_CALENDAR:
-      return {
-        ...state,
-        currentDate: action.payload.currentDate,
-        currentMonth: action.payload.currentMonth,
-        navigatedMonth: action.payload.navigatedMonth,
-        initPrevMonth: action.payload.initPrevMonth,
-        initNextMonth: action.payload.initNextMonth
-      }
     case PREV_MONTH:
     case NEXT_MONTH:
     case NEXT_YEAR:
