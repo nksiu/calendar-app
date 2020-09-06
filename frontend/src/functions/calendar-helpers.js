@@ -79,7 +79,7 @@ export const createMonthMap = (yearAndMonth, prevMonth, nextMonth, currentDate, 
   if (appointmentInfo.isLoading) {
     return []
   }
-  console.log('hit here')
+
   const daysInMonth = getDaysInMonth(yearAndMonth)
   const daysInPrevMonth = getPreviousMonth(yearAndMonth)
   const dayOfWeek = firstWeekDayOfMonth(yearAndMonth)
