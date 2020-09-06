@@ -22,7 +22,7 @@ export const getCurrentMonthFirstDay = () => {
   return moment().startOf('month').format('YYYY-MM-DD')
 }
 
-const getDaysInMonth = (yearAndMonth) => {
+export const getDaysInMonth = (yearAndMonth) => {
   return moment(yearAndMonth, 'YYYY-MM').daysInMonth()
 }
 
@@ -40,6 +40,18 @@ export const addOneYear = (date) => {
 
 export const subtractOneYear = (date) => {
   return moment(date).subtract(1, 'years').format('YYYY-MM-DD')
+}
+
+export const getPrevAndNextMonth = (date) => {
+  const nextMonth = addOneMonth(date).split('-')
+  const prevMonth = subtractOneMonth(date).split('-')
+
+  const months = {
+    next: `${nextMonth[0]}-${nextMonth[1]}`,
+    prev: `${prevMonth[0]}-${prevMonth[1]}`
+  }
+
+  return months
 }
 
 const getPreviousMonth = (yearAndMonth) => {
@@ -63,7 +75,11 @@ const zeroToCurrentDate = (currentDay) => {
   return currentDay
 }
 
-export const createMonthMap = (yearAndMonth, prevMonth, nextMonth, currentDate) => {
+export const createMonthMap = (yearAndMonth, prevMonth, nextMonth, currentDate, appointmentInfo) => {
+  if (appointmentInfo.isLoading) {
+    return []
+  }
+  console.log('hit here')
   const daysInMonth = getDaysInMonth(yearAndMonth)
   const daysInPrevMonth = getPreviousMonth(yearAndMonth)
   const dayOfWeek = firstWeekDayOfMonth(yearAndMonth)
@@ -78,6 +94,8 @@ export const createMonthMap = (yearAndMonth, prevMonth, nextMonth, currentDate) 
   let dayCounter = 0
 
   for (let i = 0; i <= numOfDaysInCalendar; i++) {
+    let appointmentsForDay = []
+
     if (i === dayOfWeek) {
       currentDay = 1
       partOfCurrentMonth = true
@@ -97,12 +115,20 @@ export const createMonthMap = (yearAndMonth, prevMonth, nextMonth, currentDate) 
       dayCounter = 0
     }
 
+    const dateInLoop = `${date[0]}-${date[1]}-${zeroToCurrentDate(currentDay)}`
+
+    appointmentInfo.appointments.forEach(appointment => {
+      if (appointment.date_to_query === dateInLoop)
+        appointmentsForDay.push(appointment)
+    })
+
     week.push({
       numOfDay: currentDay,
       isPartOfCurrentMonth: partOfCurrentMonth,
       isSunday: dayCounter === 0,
-      date: `${date[0]}-${date[1]}-${zeroToCurrentDate(currentDay)}`,
-      isToday: currentDate === `${date[0]}-${date[1]}-${zeroToCurrentDate(currentDay)}`
+      date: dateInLoop,
+      isToday: currentDate === dateInLoop,
+      appointments: appointmentsForDay
     })
 
     currentDay++

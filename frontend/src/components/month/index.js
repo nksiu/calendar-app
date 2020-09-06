@@ -9,9 +9,9 @@ import * as CalendarHelpers from '../../functions/calendar-helpers'
 import WeekDays from '../week-days'
 import Week from '../week'
 
-const Month = ({calendarInfo}) => {
-  const month = CalendarHelpers.createMonthMap(calendarInfo.currentMonth, calendarInfo.initPrevMonth, calendarInfo.initNextMonth, calendarInfo.currentDate)
-  
+const Month = ({calendarInfo, appointmentInfo}) => {
+  const month = CalendarHelpers.createMonthMap(calendarInfo.currentMonth, calendarInfo.initPrevMonth, calendarInfo.initNextMonth, calendarInfo.currentDate, appointmentInfo)
+
   return (
     <div>
       <WeekDays/>
@@ -23,7 +23,8 @@ const Month = ({calendarInfo}) => {
 }
 
 const mapStateToProps = state => ({
-  calendarInfo: state.calendarInfo
+  calendarInfo: state.calendarInfo,
+  appointmentInfo: state.appointment
 })
 
 export default connect(mapStateToProps, null)(Month);

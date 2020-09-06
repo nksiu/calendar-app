@@ -12,13 +12,15 @@ const AppointmentSchema = new Schema({
   },
   start_date: {
     type: Date,
-    default: Date.now,
     required: true 
   },
   end_date: {
     type: Date,
-    default: Date.now,
     required: true 
+  },
+  date_to_query: {
+    type: String,
+    required: true
   }
 })
 

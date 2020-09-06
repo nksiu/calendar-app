@@ -1,11 +1,12 @@
 import React from 'react'
 import AppointmentWrapperSC from './appointment-wrapper-sc'
 
-const Appointment = () => {
+const Appointment = ({appointment}) => {
+  const {appointment_name} = appointment
 
   return (
     <AppointmentWrapperSC>
-      11:00am Go Eat Lunch
+      {appointment_name}
     </AppointmentWrapperSC>
   )
 }

@@ -6,8 +6,9 @@ const Appointment = require('../../models/Appointment')
 // @route GET api/appointments
 // @desc Get all appointments
 router.get('/', (req, res) => {
-  Appointment.find()
-    .sort({date: -1})
+  console.log(req.query)
+  Appointment.find({start_date: {$gte: `${req.query.prevMonth}-10T00:00:00.000Z`, $lte: `${req.query.nextMonth}-10T00:00:00.000Z`}})
+    .sort({start_date: -1})
     .then(appointments => res.json(appointments))
 })
 
@@ -19,6 +20,7 @@ router.post('/', (req, res) => {
     appointment_name: req.body.appointmentName,
     start_date: req.body.startDate,
     end_date: req.body.endDate,
+    date_to_query: req.body.dateToQuery
   })
 
   newAppointment.save()
