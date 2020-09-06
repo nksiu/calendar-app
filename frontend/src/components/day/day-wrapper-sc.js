@@ -5,7 +5,8 @@ const DayWrapperSC = styled.div`
   border-left: ${props => (props.isSunday? "2px solid black" : "none")};
   border-top: none;
   background-color: ${props => (props.isPartOfCurrentMonth ? 'white' : 'gainsboro')};
-  width: 200px;
+  width: ${props => (props.screenWidth ? props.screenWidth : '200')}px;
+  max-width: 250px;
   height: 150px;
 
   .circle {

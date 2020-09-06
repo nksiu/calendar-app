@@ -23,6 +23,7 @@ import CalendarLayoutWrapperSC from './styled-wrapper/calendar-layout-wrapper'
 
 //Actions
 import * as CalendarHelpers from './functions/calendar-helpers'
+import {getAppointments} from './actions/appointmentActions'
 import {goNextMonth, goPrevMonth, goNextYear, goPrevYear} from './actions/calendarActions'
 
 class App extends Component {
@@ -30,7 +31,8 @@ class App extends Component {
     super(props)
     this.state = {
       topText: '',
-      alert: {text: '', severity: '', shouldShow: false}
+      alert: {text: '', severity: '', shouldShow: false},
+      currentYearAndMonth: null
     }
 
     this.handleAlert = this.handleAlert.bind(this)
@@ -38,7 +40,32 @@ class App extends Component {
 
   componentDidMount() {
     const {calendarInfo} = store.getState()
+    const nextMonth = calendarInfo.initNextMonth
+    const prevMonth = calendarInfo.initPrevMonth
+
+    const filterData = {
+      nextMonth,
+      prevMonth
+    }
+
+    store.dispatch(getAppointments(filterData))
     this.setState({topText: CalendarHelpers.getTodayText(calendarInfo.currentMonth)})
+    this.setState({currentYearAndMonth: calendarInfo.currentMonth})
+  }
+
+  componentDidUpdate() {
+    const {calendarInfo} = store.getState()
+    const nextMonth = calendarInfo.initNextMonth
+    const prevMonth = calendarInfo.initPrevMonth
+
+    if (this.state.currentYearAndMonth !== calendarInfo.currentMonth){
+      const filterData = {
+        nextMonth,
+        prevMonth
+      }
+      store.dispatch(getAppointments(filterData))
+      this.setState({currentYearAndMonth: calendarInfo.currentMonth})
+    }
   }
 
   changeTopText() {

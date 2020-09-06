@@ -22,7 +22,7 @@ import AlertWrapperSC from './alert-wrapper-sc'
 //Helper Functions
 import * as CalendarHelpers from '../../functions/calendar-helpers'
 
-const AppointmentModalBody = ({handleModal, handleAlert, appointment, addAppointment}) => {
+const AppointmentModalBody = ({handleModal, handleAlert, addAppointment, calendarInfo}) => {
   const currentDate = CalendarHelpers.getTodayDate()
   const currentTime = CalendarHelpers.getCurrentTime()
 
@@ -30,6 +30,7 @@ const AppointmentModalBody = ({handleModal, handleAlert, appointment, addAppoint
 
   const [selectedStartDate, setSelectedStartDate] = useState(new Date(`${currentDate}T${currentTime}`))
   const [selectedEndDate, setSelectedEndDate] = useState(new Date(`${currentDate}T${currentTime}`))
+  const [dateToQuery, setDateToQuery] = useState(calendarInfo.currentDate)
 
   const [isValidStartDate, setIsValidStartDate] = useState(true)
   const [isValidEndDate, setIsValidEndDate] = useState(true)
@@ -40,6 +41,7 @@ const AppointmentModalBody = ({handleModal, handleAlert, appointment, addAppoint
     if (date){
       setSelectedStartDate(date.toDate())
       setIsValidStartDate(date.isValid())
+      setDateToQuery(date.format('YYYY-MM-DD'))
     }else{
       setSelectedStartDate(date)
       setIsValidStartDate(false)
@@ -81,7 +83,8 @@ const AppointmentModalBody = ({handleModal, handleAlert, appointment, addAppoint
         appointmentAuthor: 'default',
         appointmentName: title.text,
         startDate: selectedStartDate,
-        endDate: selectedEndDate
+        endDate: selectedEndDate,
+        dateToQuery
       }
       addAppointment(newAppointment)
       handleModal(false)
@@ -181,7 +184,7 @@ const AppointmentModalBody = ({handleModal, handleAlert, appointment, addAppoint
 }
 
 const mapStateToProps = state => ({
-  appointment: state.appointment
+  calendarInfo: state.calendarInfo
 })
 
 export default connect(mapStateToProps, {addAppointment})(AppointmentModalBody)
