@@ -30,11 +30,18 @@ const AppointmentAccordion = ({appointment, isEven}) => {
     hour12: true
   }
 
+  const startDate = new Date(start_date).toDateString()
   const startTime = new Date(start_date).toLocaleTimeString([], timeFormat)
 
+  const endDate = new Date(end_date).toDateString()
+  const endTime = new Date(end_date).toLocaleTimeString([], timeFormat)
+
   const rows = [
-    createData('Start Date', start_date),
-    createData('End Date', end_date)
+    createData('Start Date', startDate),
+    createData('Starts at', startTime),
+    createData('End Date', endDate),
+    createData('Ends at', endTime)
+
   ]
 
   return (
