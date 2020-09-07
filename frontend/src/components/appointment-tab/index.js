@@ -1,11 +1,10 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography'
+import AppointmentAccordion from '../appointment-accordion'
+import { v4 as uuidv4 } from 'uuid'
 
-const AppointmentTab = ({appointment}) => {
+const AppointmentTab = ({appointments}) => {
   return (
-    <Typography>
-      {appointment.appointment_name}
-    </Typography>
+    appointments.map(appointment => (<AppointmentAccordion key={uuidv4()} appointment={appointment}/>))
   )
 }
 
