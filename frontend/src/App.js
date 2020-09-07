@@ -15,6 +15,7 @@ import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
 import ArrowRightIcon from '@material-ui/icons/ArrowRight'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+import Typography from '@material-ui/core/Typography'
 import Options from './components/options'
 
 //Styling
@@ -113,7 +114,9 @@ class App extends Component {
             <IconButton className='prev-month' aria-label='prev-month' size='medium' onClick={() => { this.handleSubmit('left') }}>
               <ArrowLeftIcon fontSize='large' />
             </IconButton>
-            <h1>{this.state.topText}</h1>
+            <Typography variant='h4' className='month-text'>
+              {this.state.topText}
+            </Typography>
             <IconButton className='next-month' aria-label='next-month' size='medium' onClick={() => { this.handleSubmit('right') }}>
               <ArrowRightIcon fontSize='large' />
             </IconButton>

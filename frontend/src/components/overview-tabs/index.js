@@ -8,7 +8,7 @@ import AppointmentTab from '../appointment-tab'
 //Material UI
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-import { AppBar } from '@material-ui/core'
+import { AppBar, Typography} from '@material-ui/core'
 
 
 const OverviewTabs = ({appointments, date}) => {
@@ -29,11 +29,15 @@ const OverviewTabs = ({appointments, date}) => {
       { appointments.length ?
           appointments.map(appointment => (<AppointmentTab key={uuidv4()} appointment={appointment}/>))
         :
-        `No appointments on ${date}`
+        <Typography>
+          No appointments on {date}
+        </Typography>
       }
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Weather is currently unavailable
+        <Typography>
+          Weather is currently unavailable
+        </Typography>
       </TabPanel>
     </Fragment>
   )

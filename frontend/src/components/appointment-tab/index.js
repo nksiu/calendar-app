@@ -1,10 +1,11 @@
 import React from 'react'
+import Typography from '@material-ui/core/Typography'
 
 const AppointmentTab = ({appointment}) => {
   return (
-    <div>
+    <Typography>
       {appointment.appointment_name}
-    </div>
+    </Typography>
   )
 }
 

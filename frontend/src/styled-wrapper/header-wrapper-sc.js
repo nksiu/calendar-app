@@ -9,7 +9,8 @@ const HeaderWrapperSC = styled.div`
   grid-area: left-arrow;
 }
 
-h1 {
+.month-text {
+  margin-top: 9px;
   grid-area: text;
   text-align: center;
 }
@@ -24,7 +25,7 @@ h1 {
 
   display: grid;
   justify-content: center;
-  grid-template-columns: 40px 40px 220px 40px 40px;
+  grid-template-columns: 40px 40px 260px 40px 40px;
   grid-template-rows: auto;
   grid-template-areas:
     "big-left-arrow left-arrow text right-arrow big-right-arrow"
