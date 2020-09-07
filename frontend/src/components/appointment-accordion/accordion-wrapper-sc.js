@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const AccordionWrapperSC = styled.div`
   .root {
     width: 100%;
+    background-color: ${props => (props.isEven ? 'white': 'gainsboro')}
   }
 
   .heading {

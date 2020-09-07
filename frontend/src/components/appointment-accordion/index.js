@@ -22,7 +22,7 @@ function createData(left, right) {
   return { left, right }
 }
 
-const AppointmentAccordion = ({appointment}) => {
+const AppointmentAccordion = ({appointment, isEven}) => {
   const {appointment_name, start_date, end_date} = appointment
   const timeFormat = {
     hour: '2-digit', 
@@ -38,7 +38,7 @@ const AppointmentAccordion = ({appointment}) => {
   ]
 
   return (
-    <AccordionWrapperSC>
+    <AccordionWrapperSC isEven={isEven}>
       <Accordion className='root' TransitionProps={{ unmountOnExit: true }}>
 
         <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
