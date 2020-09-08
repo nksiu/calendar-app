@@ -1,4 +1,4 @@
-import {GET_APPOINTMENT, ADD_APPOINTMENT} from './types'
+import {GET_APPOINTMENT, ADD_APPOINTMENT, DELETE_APPOINTMENT} from './types'
 import axios from 'axios'
 
 export const getAppointments = (filterData) => (dispatch, getState) => {
@@ -17,4 +17,13 @@ export const addAppointment = (newAppointment) => (dispatch, getState) => {
       payload: res.data
     }))
     .catch(err => console.log('could not add appoinment', err.response.data))
+}
+
+export const deleteAppointment = (id) => (dispatch, getState) => {
+  axios.delete(`/api/appointments/${id}`)
+    .then(res => dispatch({
+      type: DELETE_APPOINTMENT,
+      payload: id
+    }))
+    .catch(err => console.log('could not delete appointment', err.response.data))
 }

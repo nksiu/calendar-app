@@ -8,12 +8,12 @@ import AppointmentTab from '../appointment-tab'
 import {Typography} from '@material-ui/core'
 
 
-const OverviewTabs = ({value, appointments, date}) => {
+const OverviewTabs = ({value, appointments, date, handleAlert}) => {
   return (
     <Fragment>
       <TabPanel value={value} index={0}>
       { appointments.length ?
-          <AppointmentTab appointments={appointments}/>
+          <AppointmentTab appointments={appointments} handleAlert={handleAlert}/>
         :
         <Typography>
           No appointments on {date}

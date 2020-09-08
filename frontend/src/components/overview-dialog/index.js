@@ -15,7 +15,7 @@ import {
   Button
 } from '@material-ui/core'
 
-const OverviewDialog = ({appointments, date, stopHoverOnDialogClose}) => {
+const OverviewDialog = ({appointments, date, stopHoverOnDialogClose, handleAlert}) => {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState(0)
 
@@ -48,10 +48,10 @@ const OverviewDialog = ({appointments, date, stopHoverOnDialogClose}) => {
           </AppBar>
         </DialogTitle>
         <DialogContent>
-          <OverviewTabs value={value} appointments={appointments} date={date}/>
+          <OverviewTabs value={value} appointments={appointments} date={date} handleAlert={handleAlert}/>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus color='primary' onClick={handleClose}>
+          <Button autoFocus onClick={handleClose}>
             Close
           </Button>
         </DialogActions>

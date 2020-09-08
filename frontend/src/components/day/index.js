@@ -9,7 +9,7 @@ import OverviewDialog from '../overview-dialog'
 import DayWrapperSC from './day-wrapper-sc'
 import DayTopWrapperSC from './day-top-wrapper-sc'
 
-const Day = ({dayInfo}) => {
+const Day = ({dayInfo, handleAlert}) => {
   const [windowSize, setWindowSize] = useState({width: undefined, height: undefined})
   const [isShown, setIsShown] = useState(false)
   const stopHoverOnDialogClose = () => {
@@ -47,7 +47,12 @@ const Day = ({dayInfo}) => {
           </p>
         </div>
         { isShown && 
-          <OverviewDialog appointments={appointments} date={date} stopHoverOnDialogClose={stopHoverOnDialogClose}/>
+          <OverviewDialog 
+            appointments={appointments} 
+            date={date} 
+            stopHoverOnDialogClose={stopHoverOnDialogClose} 
+            handleAlert={handleAlert}
+          />
         }
       </DayTopWrapperSC>
       {
