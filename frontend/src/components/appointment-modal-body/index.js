@@ -73,6 +73,11 @@ const AppointmentModalBody = ({handleModal, handleAlert, addAppointment, calenda
       fadeAlert()
     }
 
+    else if(title.text.length > 60) {
+      setAlert({text: 'Title cannot be longer than 60 characters', severity: 'error', shouldShow: true})
+      setTitle({...title, error: true})
+    }
+
     else if (JSON.stringify(selectedEndDate) === JSON.stringify(selectedStartDate)) {
       setAlert({text: 'The date and time are the same', severity: 'error', shouldShow: true})
       fadeAlert()
