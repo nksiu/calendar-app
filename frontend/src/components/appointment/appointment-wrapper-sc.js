@@ -1,15 +1,13 @@
 import styled from 'styled-components'
 
 const AppointmentWrapperSC = styled.div`
-  background-color: cornflowerblue;
-  width: ${props => (props.screenWidth ? `${props.screenWidth}px`: '93%')};
-  height: 10%;
-  margin-top 2%;
-  margin-left: 2%;
-  padding: 3px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  .list-item {
+    background-color: cornflowerblue;
+    padding: 3px;
+    margin-top: 2%;
+    width: ${props => props.appointmentWidth}px; 
+    white-space: nowrap;
+  }
 `
 
 export default AppointmentWrapperSC

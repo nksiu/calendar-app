@@ -1,7 +1,27 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+
+//Styling
 import AppointmentWrapperSC from './appointment-wrapper-sc'
 
-const Appointment = ({appointment, screenWidth}) => {
+//Material UI
+import {
+  ListItem
+} from '@material-ui/core'
+
+const Appointment = ({appointment}) => {
+  const elementWidth = document.getElementsByClassName('day-comp')[0].clientWidth
+  const [dynamicWidth, setAppointmentWidth] = useState(elementWidth)
+
+  useEffect(() => {
+    const elementWidth = document.getElementsByClassName('day-comp')[0].clientWidth
+    function handleResize() {
+      setAppointmentWidth(elementWidth)
+    }
+    window.addEventListener('resize', handleResize)
+    handleResize()
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const {appointment_name, start_date} = appointment
   const timeFormat = {
     hour: '2-digit', 
@@ -10,11 +30,12 @@ const Appointment = ({appointment, screenWidth}) => {
   }
 
   const startTime = new Date(start_date).toLocaleTimeString([], timeFormat)
-  const appointmentWidth = screenWidth > 250 ? 250 - 16 : screenWidth - 18
 
   return (
-    <AppointmentWrapperSC screenWidth={appointmentWidth}>
-      {`${startTime} ${appointment_name}`}
+    <AppointmentWrapperSC appointmentWidth={dynamicWidth}>
+      <ListItem className='list-item'>
+        {`${startTime} ${appointment_name}`}
+      </ListItem>
     </AppointmentWrapperSC>
   )
 }

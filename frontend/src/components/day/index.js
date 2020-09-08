@@ -8,6 +8,10 @@ import OverviewDialog from '../overview-dialog'
 //Styling
 import DayWrapperSC from './day-wrapper-sc'
 import DayTopWrapperSC from './day-top-wrapper-sc'
+import ListWrapperSC from './list-wrapper-sc'
+
+//Material UI
+import {List} from '@material-ui/core'
 
 const Day = ({dayInfo, handleAlert}) => {
   const [windowSize, setWindowSize] = useState({width: undefined, height: undefined})
@@ -39,6 +43,7 @@ const Day = ({dayInfo, handleAlert}) => {
       screenWidth={screenWidth}
       onMouseEnter={() => setIsShown(true)}
       onMouseLeave={() => setIsShown(false)}
+      className='day-comp'
     >
       <DayTopWrapperSC>
         <div className='circle'>
@@ -55,9 +60,13 @@ const Day = ({dayInfo, handleAlert}) => {
           />
         }
       </DayTopWrapperSC>
-      {
-        appointments.map(appointment => (<Appointment key={uuidv4()} appointment={appointment} screenWidth={screenWidth}/>))
-      }
+      <ListWrapperSC>
+        <List component='nav' aria-label='preview-appointment' className='root-list'>
+          {
+            appointments.map(appointment => (<Appointment key={uuidv4()} appointment={appointment}/>))
+          }
+        </List>
+      </ListWrapperSC>
     </DayWrapperSC>
   )
 }
