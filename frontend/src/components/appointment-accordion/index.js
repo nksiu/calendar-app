@@ -1,4 +1,8 @@
 import React from 'react'
+import {connect} from 'react-redux'
+
+//Actions
+import {deleteAppointment} from '../../actions/appointmentActions'
 
 //Material UI
 import {
@@ -6,12 +10,15 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  AccordionActions,
   Paper,
   Table,
   TableContainer,
   TableBody,
   TableCell,
-  TableRow
+  TableRow,
+  Divider,
+  Button
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
@@ -22,8 +29,8 @@ function createData(left, right) {
   return { left, right }
 }
 
-const AppointmentAccordion = ({appointment, isEven}) => {
-  const {appointment_name, start_date, end_date} = appointment
+const AppointmentAccordion = ({appointment, isEven, deleteAppointment, handleAlert}) => {
+  const {appointment_name, start_date, end_date, _id} = appointment
   const timeFormat = {
     hour: '2-digit', 
     minute: '2-digit',
@@ -41,8 +48,12 @@ const AppointmentAccordion = ({appointment, isEven}) => {
     createData('Starts at', startTime),
     createData('End Date', endDate),
     createData('Ends at', endTime)
-
   ]
+
+  const onDeleteClick = (id) => {
+    deleteAppointment(id)
+    handleAlert({text: 'Successfully deleted appointment', severity: 'success', shouldShow: true})
+  }
 
   return (
     <AccordionWrapperSC isEven={isEven}>
@@ -73,10 +84,21 @@ const AppointmentAccordion = ({appointment, isEven}) => {
             </Table>
           </TableContainer>
         </AccordionDetails>
+        
+        <Divider/>
+
+        <AccordionActions>
+          <Button color='primary' size='small'>
+            Edit
+          </Button>
+          <Button color='secondary' size='small' onClick={() => onDeleteClick(_id)}>
+            Delete
+          </Button>
+        </AccordionActions>
 
       </Accordion>
     </AccordionWrapperSC>
   )
 }
 
-export default AppointmentAccordion
+export default connect(null, {deleteAppointment})(AppointmentAccordion)

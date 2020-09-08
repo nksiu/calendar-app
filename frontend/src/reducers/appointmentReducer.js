@@ -1,4 +1,4 @@
-import {ADD_APPOINTMENT, GET_APPOINTMENT} from '../actions/types'
+import {ADD_APPOINTMENT, GET_APPOINTMENT, DELETE_APPOINTMENT} from '../actions/types'
 
 const initialState = {
   appointments: [],
@@ -17,6 +17,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         appointments: [action.payload, ...state.appointments]
+      }
+    case DELETE_APPOINTMENT:
+      return {
+        ...state,
+        appointments: state.appointments.filter(appointment => appointment._id !== action.payload)
       }
     default:
       return state

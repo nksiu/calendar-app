@@ -136,7 +136,7 @@ class App extends Component {
             null
         }
 
-        <Month/>
+        <Month handleAlert={this.handleAlert}/>
 
         </div>
       </Provider>
