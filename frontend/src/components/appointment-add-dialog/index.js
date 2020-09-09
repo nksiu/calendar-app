@@ -131,8 +131,8 @@ const AppointmentAddDialog = ({handleButtonClose, handleAlert, addAppointment, c
         dateToQuery: formInfo.dateToQuery
       }
       addAppointment(newAppointment)
-      handleAlert({text: 'Successfully created appointment', severity: 'success', shouldShow: true})
       handleClose()
+      handleAlert({text: 'Successfully created appointment', severity: 'success', shouldShow: true})
     }else{
       setAlert({text: 'Invalid date or time provided', severity: 'error', shouldShow: true})
       fadeAlert()
