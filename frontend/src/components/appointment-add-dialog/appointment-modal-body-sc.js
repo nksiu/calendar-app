@@ -5,14 +5,13 @@ const AppointmentModalBodyWrapperSC = styled.div`
   justify-content: center;
   flex-direction: column;
   background-color: white;
-  width: 500px;
   border: '2px solid black';
   padding: 10px;
   margin: 10% auto;
   
 
   .picker {
-    margin-left: 10%;
+    margin-left: 17%;
   }
 `
 
