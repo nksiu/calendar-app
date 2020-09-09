@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import MomentUtils from '@date-io/moment'
 
+//Actions
 import {addAppointment} from '../../actions/appointmentActions'
 
 //Material UI
@@ -29,7 +30,6 @@ import AlertWrapperSC from './alert-wrapper-sc'
 
 //Helper Functions
 import * as CalendarHelpers from '../../functions/calendar-helpers'
-
 
 const AppointmentAddDialog = ({handleButtonClose, handleAlert, addAppointment, calendarInfo}) => {
   const [open, setOpen] = useState(false)
