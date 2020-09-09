@@ -138,8 +138,6 @@ const AppointmentUpdateDialog = ({handleAlert, addAppointment, appointment}) => 
     })
   }
 
-  const buttonSize = 25
-
   return (
     <div>
       <Button color='primary' size='small' onClick={handleClickOpen}>
