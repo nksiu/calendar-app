@@ -6,7 +6,7 @@ import {Provider} from 'react-redux'
 import store from './store'
 
 import {Alert} from '@material-ui/lab'
-import AlertWrapperSC from './components/appointment-modal-body/alert-wrapper-sc'
+import AlertWrapperSC from './components/appointment-add-dialog/alert-wrapper-sc'
 
 //Components
 import Month from './components/month'
