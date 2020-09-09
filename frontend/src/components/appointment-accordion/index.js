@@ -1,6 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+//Components
+import AppointmentUpdateDialog from '../appointment-update-dialog'
+
 //Actions
 import {deleteAppointment} from '../../actions/appointmentActions'
 
@@ -88,9 +91,7 @@ const AppointmentAccordion = ({appointment, isEven, deleteAppointment, handleAle
         <Divider/>
 
         <AccordionActions>
-          <Button color='primary' size='small'>
-            Edit
-          </Button>
+          <AppointmentUpdateDialog appointment={appointment} handleAlert={handleAlert}/>
           <Button color='secondary' size='small' onClick={() => onDeleteClick(_id)}>
             Delete
           </Button>
