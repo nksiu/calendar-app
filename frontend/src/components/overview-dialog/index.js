@@ -48,7 +48,7 @@ const OverviewDialog = ({appointments, date, stopHoverOnDialogClose, handleAlert
           </AppBar>
         </DialogTitle>
         <DialogContent>
-          <OverviewTabs value={value} appointments={appointments} date={date} handleAlert={handleAlert}/>
+          <OverviewTabs value={value} appointments={appointments} date={date} handleAlert={handleAlert} handleCloseOnUpdate={handleClose}/>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>

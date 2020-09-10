@@ -26,7 +26,7 @@ import AppointmentModalBodyWrapperSC from '../appointment-add-dialog/appointment
 import WeekWrapperSC from '../week-days/week-wrapper'
 import AlertWrapperSC from '../appointment-add-dialog/alert-wrapper-sc'
 
-const AppointmentUpdateDialog = ({handleAlert, updateAppointment, appointment}) => {
+const AppointmentUpdateDialog = ({handleAlert, updateAppointment, appointment, handleCloseOnUpdate}) => {
   const [open, setOpen] = useState(false)
 
   const [formInfo, setFormInfo] = useState({
@@ -124,6 +124,7 @@ const AppointmentUpdateDialog = ({handleAlert, updateAppointment, appointment}) 
       }
       updateAppointment(updatedAppointment)
       handleClose()
+      handleCloseOnUpdate()
       handleAlert({text: 'Successfully updated appointment', severity: 'success', shouldShow: true})
     }else{
       setAlert({text: 'Invalid date or time provided', severity: 'error', shouldShow: true})
