@@ -34,4 +34,19 @@ router.delete('/:id', (req, res) => {
     .catch(err => res.status(404).json({success: false}))
 })
 
+// @route PUT api/appointments/:id
+// @desc Update an appointment
+router.put('/:id', (req, res) => {
+  const filter = {_id: req.body.appointmentId}
+  const update = {
+    appointment_name: req.body.appointmentName,
+    start_date: req.body.startDate,
+    end_date: req.body.endDate,
+    date_to_query: req.body.dateToQuery
+  }
+  Appointment.findOneAndUpdate(filter, update, {new: true})
+    .then(appointment => res.json(appointment))
+    .catch(err => res.status(404))
+})
+
 module.exports = router

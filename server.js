@@ -13,7 +13,7 @@ app.use(bodyParser.json())
 const db = require('./config/keys').mongoURI
 
 mongoose
-    .connect(db)
+    .connect(db, {useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => console.log('Connected to db...'))
     .catch(err => console.log(err))
 
