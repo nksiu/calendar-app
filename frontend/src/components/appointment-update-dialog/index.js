@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import MomentUtils from '@date-io/moment'
 
 //Actions
-import {addAppointment} from '../../actions/appointmentActions'
+import {updateAppointment} from '../../actions/appointmentActions'
 
 //Material UI
 import {
@@ -26,7 +26,7 @@ import AppointmentModalBodyWrapperSC from '../appointment-add-dialog/appointment
 import WeekWrapperSC from '../week-days/week-wrapper'
 import AlertWrapperSC from '../appointment-add-dialog/alert-wrapper-sc'
 
-const AppointmentUpdateDialog = ({handleAlert, addAppointment, appointment}) => {
+const AppointmentUpdateDialog = ({handleAlert, updateAppointment, appointment}) => {
   const [open, setOpen] = useState(false)
 
   const [formInfo, setFormInfo] = useState({
@@ -114,16 +114,17 @@ const AppointmentUpdateDialog = ({handleAlert, addAppointment, appointment}) => 
     }
 
     else if (formInfo.isValidStartDate && formInfo.isValidEndDate) {
-      const newAppointment = {
+      const updatedAppointment = {
+        appointmentId: appointment._id,
         appointmentAuthor: 'default',
         appointmentName: formInfo.titleText,
         startDate: formInfo.startDate,
         endDate: formInfo.endDate,
         dateToQuery: formInfo.dateToQuery
       }
-      addAppointment(newAppointment)
+      updateAppointment(updatedAppointment)
       handleClose()
-      handleAlert({text: 'Successfully created appointment', severity: 'success', shouldShow: true})
+      handleAlert({text: 'Successfully updated appointment', severity: 'success', shouldShow: true})
     }else{
       setAlert({text: 'Invalid date or time provided', severity: 'error', shouldShow: true})
       fadeAlert()
@@ -165,7 +166,7 @@ const AppointmentUpdateDialog = ({handleAlert, addAppointment, appointment}) => 
                 id='standard-basic' 
                 label='Add Title' 
                 error={formInfo.titleError} 
-                fullWidth 
+                fullWidth
                 onChange={handleTextChange}
                 defaultValue={appointment.appointment_name}
               />
@@ -242,4 +243,4 @@ const AppointmentUpdateDialog = ({handleAlert, addAppointment, appointment}) => 
   )
 }
 
-export default connect(null, {addAppointment})(AppointmentUpdateDialog)
+export default connect(null, {updateAppointment})(AppointmentUpdateDialog)
