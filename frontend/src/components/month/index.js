@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import {connect} from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -13,12 +13,12 @@ const Month = ({calendarInfo, appointmentInfo, handleAlert}) => {
   const month = CalendarHelpers.createMonthMap(calendarInfo.currentMonth, calendarInfo.initPrevMonth, calendarInfo.initNextMonth, calendarInfo.currentDate, appointmentInfo)
 
   return (
-    <div>
+    <Fragment>
       <WeekDays/>
       {
         month.map(week => (<Week key={uuidv4()} week={week} handleAlert={handleAlert}/>))
       }
-    </div>
+    </Fragment>
   )
 }
 

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
+import {createGlobalStyle} from 'styled-components'
 
 //Redux
 import {Provider} from 'react-redux'
@@ -10,13 +11,12 @@ import AlertWrapperSC from './components/appointment-add-dialog/alert-wrapper-sc
 
 //Components
 import Month from './components/month'
-import IconButton from '@material-ui/core/IconButton'
+import Options from './components/options'
+import {AppBar, Typography, IconButton, Toolbar} from '@material-ui/core'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
 import ArrowRightIcon from '@material-ui/icons/ArrowRight'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
-import Typography from '@material-ui/core/Typography'
-import Options from './components/options'
 
 //Styling
 import HeaderWrapperSC from './styled-wrapper/header-wrapper-sc'
@@ -26,6 +26,12 @@ import CalendarLayoutWrapperSC from './styled-wrapper/calendar-layout-wrapper'
 import * as CalendarHelpers from './functions/calendar-helpers'
 import {getAppointments} from './actions/appointmentActions'
 import {goNextMonth, goPrevMonth, goNextYear, goPrevYear} from './actions/calendarActions'
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: #F2F2F2;
+  }
+`
 
 class App extends Component {
   constructor(props) {
@@ -104,27 +110,31 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
+        <GlobalStyle />
         <div className="App">
-        <CalendarLayoutWrapperSC>
-          <Options handleAlert={this.handleAlert}/>
-          <HeaderWrapperSC>
-            <IconButton className='prev-year' aria-label='prev-year' size='medium' onClick={() => { this.handleSubmit('left-year') }}>
-              <ArrowBackIosIcon fontSize='large' />
-            </IconButton>
-            <IconButton className='prev-month' aria-label='prev-month' size='medium' onClick={() => { this.handleSubmit('left') }}>
-              <ArrowLeftIcon fontSize='large' />
-            </IconButton>
-            <Typography variant='h4' className='month-text'>
-              {this.state.topText}
-            </Typography>
-            <IconButton className='next-month' aria-label='next-month' size='medium' onClick={() => { this.handleSubmit('right') }}>
-              <ArrowRightIcon fontSize='large' />
-            </IconButton>
-            <IconButton className='next-year' aria-label='next-year' size='medium' onClick={() => { this.handleSubmit('right-year') }}>
-              <ArrowForwardIosIcon fontSize='large' />
-            </IconButton>
-          </HeaderWrapperSC>
-        </CalendarLayoutWrapperSC>
+        <AppBar>
+          <CalendarLayoutWrapperSC>
+            <Options handleAlert={this.handleAlert}/>
+            <HeaderWrapperSC>
+              <IconButton className='prev-year' aria-label='prev-year' size='medium' onClick={() => { this.handleSubmit('left-year') }}>
+                <ArrowBackIosIcon fontSize='large' />
+              </IconButton>
+              <IconButton className='prev-month' aria-label='prev-month' size='medium' onClick={() => { this.handleSubmit('left') }}>
+                <ArrowLeftIcon fontSize='large' />
+              </IconButton>
+              <Typography variant='h4' className='month-text'>
+                {this.state.topText}
+              </Typography>
+              <IconButton className='next-month' aria-label='next-month' size='medium' onClick={() => { this.handleSubmit('right') }}>
+                <ArrowRightIcon fontSize='large' />
+              </IconButton>
+              <IconButton className='next-year' aria-label='next-year' size='medium' onClick={() => { this.handleSubmit('right-year') }}>
+                <ArrowForwardIosIcon fontSize='large' />
+              </IconButton>
+            </HeaderWrapperSC>
+          </CalendarLayoutWrapperSC>
+        </AppBar>
+        <Toolbar/>
         {
           this.state.alert.shouldShow ?
             <AlertWrapperSC>
@@ -137,7 +147,6 @@ class App extends Component {
         }
 
         <Month handleAlert={this.handleAlert}/>
-
         </div>
       </Provider>
     )

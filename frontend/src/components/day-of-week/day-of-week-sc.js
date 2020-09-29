@@ -6,6 +6,7 @@ const DayOfWeekWrapperSC = styled.div`
   width: ${props => props.screenWidth ? props.screenWidth : '200'}px;
   max-width: 250px;
   text-align: center;
+  background-color: white;
   
   p {
     color: black;
