@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const auth = require('../../middleware/auth')
 
 const Appointment = require('../../models/Appointment')
 
@@ -13,7 +14,8 @@ router.get('/', (req, res) => {
 
 // @route POST api/appointments
 // @desc Create an appointment
-router.post('/', (req, res) => {
+// @access Private
+router.post('/', auth, (req, res) => {
   const newAppointment = new Appointment({
     appointment_author: req.body.appointmentAuthor,
     appointment_name: req.body.appointmentName,
@@ -28,7 +30,8 @@ router.post('/', (req, res) => {
 
 // @route DELETE api/appointments/:id
 // @desc Delete an appointment
-router.delete('/:id', (req, res) => {
+// @access Private
+router.delete('/:id', auth, (req, res) => {
   Appointment.findById(req.params.id)
     .then(appointment => appointment.remove().then(() => res.json({success: true})))
     .catch(err => res.status(404).json({success: false}))
@@ -36,7 +39,8 @@ router.delete('/:id', (req, res) => {
 
 // @route PUT api/appointments/:id
 // @desc Update an appointment
-router.put('/:id', (req, res) => {
+// @access Private
+router.put('/:id', auth, (req, res) => {
   const filter = {_id: req.body.appointmentId}
   const update = {
     appointment_name: req.body.appointmentName,
