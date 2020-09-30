@@ -12,6 +12,7 @@ import AlertWrapperSC from './components/appointment-add-dialog/alert-wrapper-sc
 //Components
 import Month from './components/month'
 import Options from './components/options'
+import AuthBar from './components/auth'
 import {AppBar, Typography, IconButton, Toolbar} from '@material-ui/core'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
 import ArrowRightIcon from '@material-ui/icons/ArrowRight'
@@ -134,6 +135,7 @@ class App extends Component {
                 <ArrowForwardIosIcon fontSize='large' />
               </IconButton>
             </HeaderWrapperSC>
+            <AuthBar/>
           </CalendarLayoutWrapperSC>
         </AppBar>
         <Toolbar/>
