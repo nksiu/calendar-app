@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import { connect } from 'react-redux'
 
 //Components
@@ -7,10 +7,25 @@ import {Button} from '@material-ui/core'
 //Actions
 import {logout} from '../../../actions/authActions'
 
-const Logout = ({logout}) => {
+const Logout = ({logout, authInfo, handleButtonClose}) => {
+  const {isAuthenticated} = authInfo
+  const handleClick = () => {
+    logout()
+    handleButtonClose()
+  }
   return (
-    <Button color='inherit' onClick={logout}>Logout</Button>
+    <Fragment>
+      {
+        isAuthenticated ? 
+          <Button color='inherit' onClick={handleClick}>Logout</Button>
+        : null
+      }
+    </Fragment>
   )
 }
 
-export default connect(null, logout)(Logout)
+const mapStateToProps = state => ({
+  authInfo: state.auth
+})
+
+export default connect(mapStateToProps, {logout})(Logout)

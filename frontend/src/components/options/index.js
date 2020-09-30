@@ -1,10 +1,13 @@
 import React, {useState} from 'react'
+
+//Components
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Popover from '@material-ui/core/Popover'
 import SettingsIcon from '@material-ui/icons/Settings'
 import OptionWrapperSC from './option-wrapper-sc'
 import AppointmentAddDialog from '../appointment-add-dialog'
+import SettingsDrawer from '../settings-drawer'
 
 const Options = ({handleAlert}) => {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -45,9 +48,7 @@ const Options = ({handleAlert}) => {
       >
         <OptionWrapperSC>
           <AppointmentAddDialog handleButtonClose={handleButtonClose} handleAlert={handleAlert}/>
-          <IconButton className='settings' aria-label='settings'>
-            <SettingsIcon style={{fontSize: buttonSize}}/>
-          </IconButton>
+          <SettingsDrawer handleButtonClose={handleButtonClose}/>
         </OptionWrapperSC>
       </Popover>
     </div>

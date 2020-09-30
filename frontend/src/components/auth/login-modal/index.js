@@ -85,7 +85,7 @@ const LoginDialog = ({login}) => {
                 onChange={onChange}
               />
               <TextField 
-                id='standard-basic' 
+                id='standard' 
                 name='password'
                 label='Password' 
                 error={formInfo.passwordError}

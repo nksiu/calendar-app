@@ -94,7 +94,7 @@ const RegisterDialog = ({register}) => {
                 onChange={onChange}
               />
               <TextField 
-                id='standard-basic'
+                id='standard'
                 name='email'
                 label='Email Address'
                 error={formInfo.emailError}
@@ -103,7 +103,7 @@ const RegisterDialog = ({register}) => {
                 onChange={onChange}
               />
               <TextField 
-                id='standard-basic' 
+                id='standards' 
                 name='password'
                 label='Password' 
                 error={formInfo.passwordError}
