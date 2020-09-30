@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 //Components
 import Logout from '../auth/logout'
-import {Drawer, IconButton} from '@material-ui/core'
+import {Drawer, IconButton, List} from '@material-ui/core'
 import SettingsIcon from '@material-ui/icons/Settings'
 
 const SettingsDrawer = ({handleButtonClose}) => {
@@ -16,10 +16,6 @@ const SettingsDrawer = ({handleButtonClose}) => {
   })
 
   const toggleDrawer = (anchor, open) => (event) => {
-    // if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-    //   return
-    // }
-
     setState({ ...state, [anchor]: open })
     if (!open) handleButtonClose()
   }
@@ -31,7 +27,9 @@ const SettingsDrawer = ({handleButtonClose}) => {
       </IconButton>
 
       <Drawer anchor='left' open={state.left} onClose={toggleDrawer('left', false)}>
-        <Logout handleButtonClose={handleButtonClose}/>
+        <List>
+          <Logout handleButtonClose={handleButtonClose}/>
+        </List>
       </Drawer>
     </div>
   )

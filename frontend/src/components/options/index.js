@@ -4,7 +4,6 @@ import React, {useState} from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Popover from '@material-ui/core/Popover'
-import SettingsIcon from '@material-ui/icons/Settings'
 import OptionWrapperSC from './option-wrapper-sc'
 import AppointmentAddDialog from '../appointment-add-dialog'
 import SettingsDrawer from '../settings-drawer'
@@ -24,8 +23,6 @@ const Options = ({handleAlert}) => {
   const handleClose = () => {
     setAnchorEl(null)
   }
-
-  const buttonSize = 25
 
   return (
     <div className='options-menu'>

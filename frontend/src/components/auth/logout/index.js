@@ -2,7 +2,8 @@ import React, {Fragment} from 'react'
 import { connect } from 'react-redux'
 
 //Components
-import {Button} from '@material-ui/core'
+import {ListItem, ListItemIcon, ListItemText, Typography} from '@material-ui/core'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
 //Actions
 import {logout} from '../../../actions/authActions'
@@ -16,8 +17,14 @@ const Logout = ({logout, authInfo, handleButtonClose}) => {
   return (
     <Fragment>
       {
-        isAuthenticated ? 
-          <Button color='inherit' onClick={handleClick}>Logout</Button>
+        isAuthenticated ?
+          <ListItem button onClick={handleClick}>
+            <ListItemIcon><ExitToAppIcon/></ListItemIcon>
+            <ListItemText 
+             disableTypography
+             primary={<Typography style={{color: 'red'}}>Logout</Typography>}
+            />
+          </ListItem>
         : null
       }
     </Fragment>
