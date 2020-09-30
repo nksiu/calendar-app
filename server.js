@@ -1,16 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
 const config = require('config')
-
-const appointments = require('./routes/api/appointments')
-const users = require('./routes/api/users')
-const auth = require('./routes/api/auth')
-
-
 const app = express()
 
-app.use(bodyParser.json())
+app.use(express.json())
 
 const db = config.get('mongoURI')
 
@@ -20,9 +13,9 @@ mongoose
     .catch(err => console.log(err))
 
 // Routes
-app.use('/api/appointments', appointments)
-app.use('api/users', users)
-app.use('api/auth', auth)
+app.use('/api/appointments', require('./routes/api/appointments'))
+app.use('/api/users', require('./routes/api/users'))
+app.use('/api/auth', require('./routes/api/auth'))
 
 const port = process.env.PORT || 5000
 

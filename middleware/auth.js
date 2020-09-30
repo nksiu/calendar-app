@@ -5,7 +5,7 @@ function auth(req, res, next) {
   const token = req.header('x-auth-token')
 
   if (!token) {
-    res.status(401).json({msg: 'No token, authentication denied'})
+    return res.status(401).json({msg: 'No token, authentication denied'})
   }
 
   try {

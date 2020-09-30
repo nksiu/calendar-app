@@ -26,6 +26,7 @@ import CalendarLayoutWrapperSC from './styled-wrapper/calendar-layout-wrapper'
 import * as CalendarHelpers from './functions/calendar-helpers'
 import {getAppointments} from './actions/appointmentActions'
 import {goNextMonth, goPrevMonth, goNextYear, goPrevYear} from './actions/calendarActions'
+import {loadUser} from './actions/authActions'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -55,6 +56,7 @@ class App extends Component {
       prevMonth
     }
 
+    store.dispatch(loadUser())
     store.dispatch(getAppointments(filterData))
     this.setState({topText: CalendarHelpers.getTodayText(calendarInfo.currentMonth)})
     this.setState({currentYearAndMonth: calendarInfo.currentMonth})
