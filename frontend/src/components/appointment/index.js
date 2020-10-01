@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, Fragment} from 'react'
+import {connect} from 'react-redux'
 
 //Styling
 import AppointmentWrapperSC from './appointment-wrapper-sc'
@@ -8,7 +9,7 @@ import {
   ListItem
 } from '@material-ui/core'
 
-const Appointment = ({appointment}) => {
+const Appointment = ({appointment, settings}) => {
   const elementWidth = document.getElementsByClassName('day-comp')[0].clientWidth
   const [dynamicWidth, setAppointmentWidth] = useState(elementWidth)
 
@@ -32,12 +33,23 @@ const Appointment = ({appointment}) => {
   const startTime = new Date(start_date).toLocaleTimeString([], timeFormat)
 
   return (
-    <AppointmentWrapperSC appointmentWidth={dynamicWidth}>
-      <ListItem className='list-item'>
-        {`${startTime} ${appointment_name}`}
-      </ListItem>
-    </AppointmentWrapperSC>
+    <Fragment>
+      {
+        settings.hideAppointments ?
+          null
+        :
+          <AppointmentWrapperSC appointmentWidth={dynamicWidth}>
+            <ListItem className='list-item'>
+              {`${startTime} ${appointment_name}`}
+            </ListItem>
+          </AppointmentWrapperSC>
+      }
+    </Fragment>
   )
 }
 
-export default Appointment;
+const mapStateToProps = state => ({
+  settings: state.settings
+})
+
+export default connect(mapStateToProps, null)(Appointment)

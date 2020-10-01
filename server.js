@@ -1,24 +1,21 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
-
-const appointments = require('./routes/api/appointments')
-
-
-
+const config = require('config')
 const app = express()
 
-app.use(bodyParser.json())
+app.use(express.json())
 
-const db = require('./config/keys').mongoURI
+const db = config.get('mongoURI')
 
 mongoose
-    .connect(db, {useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true})
+    .connect(db, {useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then(() => console.log('Connected to db...'))
     .catch(err => console.log(err))
 
 // Routes
-app.use('/api/appointments', appointments)
+app.use('/api/appointments', require('./routes/api/appointments'))
+app.use('/api/users', require('./routes/api/users'))
+app.use('/api/auth', require('./routes/api/auth'))
 
 const port = process.env.PORT || 5000
 

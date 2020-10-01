@@ -12,6 +12,7 @@ import AlertWrapperSC from './components/appointment-add-dialog/alert-wrapper-sc
 //Components
 import Month from './components/month'
 import Options from './components/options'
+import AuthBar from './components/auth'
 import {AppBar, Typography, IconButton, Toolbar} from '@material-ui/core'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
 import ArrowRightIcon from '@material-ui/icons/ArrowRight'
@@ -26,6 +27,7 @@ import CalendarLayoutWrapperSC from './styled-wrapper/calendar-layout-wrapper'
 import * as CalendarHelpers from './functions/calendar-helpers'
 import {getAppointments} from './actions/appointmentActions'
 import {goNextMonth, goPrevMonth, goNextYear, goPrevYear} from './actions/calendarActions'
+import {loadUser} from './actions/authActions'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -55,6 +57,7 @@ class App extends Component {
       prevMonth
     }
 
+    store.dispatch(loadUser())
     store.dispatch(getAppointments(filterData))
     this.setState({topText: CalendarHelpers.getTodayText(calendarInfo.currentMonth)})
     this.setState({currentYearAndMonth: calendarInfo.currentMonth})
@@ -132,6 +135,7 @@ class App extends Component {
                 <ArrowForwardIosIcon fontSize='large' />
               </IconButton>
             </HeaderWrapperSC>
+            <AuthBar/>
           </CalendarLayoutWrapperSC>
         </AppBar>
         <Toolbar/>

@@ -7,6 +7,7 @@ const AppointmentWrapperSC = styled.div`
     margin-top: 2%;
     width: ${props => props.appointmentWidth}px; 
     white-space: nowrap;
+    border-radius: 7px;
   }
 `
 
