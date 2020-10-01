@@ -2,7 +2,8 @@ import React, {useState} from 'react'
 
 //Components
 import Logout from '../auth/logout'
-import {Drawer, IconButton, List} from '@material-ui/core'
+import SettingSwitches from './settings-switch'
+import {Drawer, IconButton, List, Divider} from '@material-ui/core'
 import SettingsIcon from '@material-ui/icons/Settings'
 
 const SettingsDrawer = ({handleButtonClose}) => {
@@ -27,6 +28,8 @@ const SettingsDrawer = ({handleButtonClose}) => {
       </IconButton>
 
       <Drawer anchor='left' open={state.left} onClose={toggleDrawer('left', false)}>
+        <SettingSwitches />
+        <Divider />
         <List>
           <Logout handleButtonClose={handleButtonClose}/>
         </List>
