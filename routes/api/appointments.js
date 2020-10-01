@@ -7,7 +7,11 @@ const Appointment = require('../../models/Appointment')
 // @route GET api/appointments
 // @desc Get all appointments
 router.get('/', (req, res) => {
-  Appointment.find({start_date: {$gte: `${req.query.prevMonth}-10T00:00:00.000Z`, $lte: `${req.query.nextMonth}-10T00:00:00.000Z`}})
+  Appointment.find(
+    {
+      start_date: {$gte: `${req.query.prevMonth}-10T00:00:00.000Z`, $lte: `${req.query.nextMonth}-10T00:00:00.000Z`},
+      appointment_author: req.query.authorId
+    })
     .sort({start_date: 1})
     .then(appointments => res.json(appointments))
 })

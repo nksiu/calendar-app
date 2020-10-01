@@ -2,14 +2,25 @@ import {
   GET_APPOINTMENT, 
   ADD_APPOINTMENT, 
   DELETE_APPOINTMENT,
-  UPDATE_APPOINTMENT
+  UPDATE_APPOINTMENT,
+  CLEAR_APPOINTMENTS
 } from './types'
 import {tokenConfig} from './authActions'
 import {returnErrors} from './errorActions'
 import axios from 'axios'
 
 export const getAppointments = (filterData) => (dispatch, getState) => {
-  axios.get('/api/appointments', {params: {nextMonth: filterData.nextMonth, prevMonth: filterData.prevMonth}})
+  console.log('hit here')
+  axios.get('/api/appointments',
+    {params: 
+      {
+        nextMonth: filterData.nextMonth, 
+        prevMonth: filterData.prevMonth,
+        authorId: filterData.authorId
+      }
+    },
+    // tokenConfig(getState)
+  )
     .then(res => dispatch({
       type: GET_APPOINTMENT,
       payload: res.data
@@ -41,4 +52,10 @@ export const updateAppointment = (updatedAppointment) => (dispatch, getState) =>
       type: UPDATE_APPOINTMENT,
       payload: res.data
     }))
+}
+
+export const clearAppointments = () => {
+  return {
+    type: CLEAR_APPOINTMENTS
+  }
 }

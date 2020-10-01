@@ -2,7 +2,8 @@ import {
   ADD_APPOINTMENT, 
   GET_APPOINTMENT, 
   DELETE_APPOINTMENT,
-  UPDATE_APPOINTMENT
+  UPDATE_APPOINTMENT,
+  CLEAR_APPOINTMENTS
 } from '../actions/types'
 
 const initialState = {
@@ -35,6 +36,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         appointments: tmpAppointments
+      }
+
+    case CLEAR_APPOINTMENTS:
+      return {
+        ...state,
+        appointments: []
       }
     default:
       return state
