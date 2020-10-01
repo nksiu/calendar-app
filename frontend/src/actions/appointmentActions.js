@@ -4,6 +4,8 @@ import {
   DELETE_APPOINTMENT,
   UPDATE_APPOINTMENT
 } from './types'
+import {tokenConfig} from './authActions'
+import {returnErrors} from './errorActions'
 import axios from 'axios'
 
 export const getAppointments = (filterData) => (dispatch, getState) => {
@@ -12,29 +14,29 @@ export const getAppointments = (filterData) => (dispatch, getState) => {
       type: GET_APPOINTMENT,
       payload: res.data
     }))
-    .catch(err => console.log('cound not get appointments', err.response.data))
+    .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
 export const addAppointment = (newAppointment) => (dispatch, getState) => {
-  axios.post('/api/appointments', newAppointment)
+  axios.post('/api/appointments', newAppointment, tokenConfig(getState))
     .then(res => dispatch({
       type: ADD_APPOINTMENT,
       payload: res.data
     }))
-    .catch(err => console.log('could not add appoinment', err.response.data))
+    .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
 export const deleteAppointment = (id) => (dispatch, getState) => {
-  axios.delete(`/api/appointments/${id}`)
+  axios.delete(`/api/appointments/${id}`, tokenConfig(getState))
     .then(res => dispatch({
       type: DELETE_APPOINTMENT,
       payload: id
     }))
-    .catch(err => console.log('could not delete appointment', err.response.data))
+    .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
 export const updateAppointment = (updatedAppointment) => (dispatch, getState) => {
-  axios.put(`/api/appointments/${updatedAppointment.appointmentId}`, updatedAppointment)
+  axios.put(`/api/appointments/${updatedAppointment.appointmentId}`, updatedAppointment, tokenConfig(getState))
     .then(res => dispatch({
       type: UPDATE_APPOINTMENT,
       payload: res.data
