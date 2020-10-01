@@ -69,7 +69,7 @@ class App extends Component {
       const filterData = {
         nextMonth,
         prevMonth,
-        authorId: auth.user ? auth.user._id : ''
+        authorId: auth.user ? auth.user.id : ''
       }
       store.dispatch(getAppointments(filterData))
       this.setState({currentYearAndMonth: calendarInfo.currentMonth})

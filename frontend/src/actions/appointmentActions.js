@@ -10,7 +10,6 @@ import {returnErrors} from './errorActions'
 import axios from 'axios'
 
 export const getAppointments = (filterData) => (dispatch, getState) => {
-  console.log('hit here')
   axios.get('/api/appointments',
     {params: 
       {
