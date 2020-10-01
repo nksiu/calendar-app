@@ -149,6 +149,9 @@ class App extends Component {
           :
             null
         }
+        {/* <Alert severity={this.state.alert.severity}>
+          {this.state.alert.text}
+        </Alert> */}
 
         <Month handleAlert={this.handleAlert}/>
         </div>

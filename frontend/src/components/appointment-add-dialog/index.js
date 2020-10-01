@@ -31,7 +31,8 @@ import AlertWrapperSC from './alert-wrapper-sc'
 //Helper Functions
 import * as CalendarHelpers from '../../functions/calendar-helpers'
 
-const AppointmentAddDialog = ({handleButtonClose, handleAlert, addAppointment, calendarInfo}) => {
+const AppointmentAddDialog = ({handleButtonClose, handleAlert, addAppointment, calendarInfo, authInfo}) => {
+  const {user} = authInfo
   const [open, setOpen] = useState(false)
 
   const currentDate = CalendarHelpers.getTodayDate()
@@ -55,7 +56,11 @@ const AppointmentAddDialog = ({handleButtonClose, handleAlert, addAppointment, c
   }
 
   const handleClickOpen = () => {
-    setOpen(true)
+    if (!user) {
+      handleAlert({text: 'You must be logged in to add appointments', severity: 'info', shouldShow: true})
+    } else {
+      setOpen(true)
+    }
   }
 
   const handleStartDateChange = (date) => {
@@ -124,7 +129,7 @@ const AppointmentAddDialog = ({handleButtonClose, handleAlert, addAppointment, c
 
     else if (formInfo.isValidStartDate && formInfo.isValidEndDate) {
       const newAppointment = {
-        appointmentAuthor: 'default',
+        appointmentAuthor: user._id,
         appointmentName: formInfo.titleText,
         startDate: formInfo.startDate,
         endDate: formInfo.endDate,
@@ -247,7 +252,8 @@ const AppointmentAddDialog = ({handleButtonClose, handleAlert, addAppointment, c
 }
 
 const mapStateToProps = state => ({
-  calendarInfo: state.calendarInfo
+  calendarInfo: state.calendarInfo,
+  authInfo: state.auth
 })
 
 export default connect(mapStateToProps, {addAppointment})(AppointmentAddDialog)
