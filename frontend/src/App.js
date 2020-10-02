@@ -51,27 +51,25 @@ class App extends Component {
     const {calendarInfo} = store.getState()
     const nextMonth = calendarInfo.initNextMonth
     const prevMonth = calendarInfo.initPrevMonth
-
     const filterData = {
       nextMonth,
       prevMonth
     }
-
-    store.dispatch(loadUser())
-    store.dispatch(getAppointments(filterData))
+    store.dispatch(loadUser(filterData))
     this.setState({topText: CalendarHelpers.getTodayText(calendarInfo.currentMonth)})
     this.setState({currentYearAndMonth: calendarInfo.currentMonth})
   }
 
   componentDidUpdate() {
-    const {calendarInfo} = store.getState()
+    const {calendarInfo, auth} = store.getState()
     const nextMonth = calendarInfo.initNextMonth
     const prevMonth = calendarInfo.initPrevMonth
 
     if (this.state.currentYearAndMonth !== calendarInfo.currentMonth){
       const filterData = {
         nextMonth,
-        prevMonth
+        prevMonth,
+        authorId: auth.user ? auth.user.id : ''
       }
       store.dispatch(getAppointments(filterData))
       this.setState({currentYearAndMonth: calendarInfo.currentMonth})
@@ -149,6 +147,9 @@ class App extends Component {
           :
             null
         }
+        {/* <Alert severity={this.state.alert.severity}>
+          {this.state.alert.text}
+        </Alert> */}
 
         <Month handleAlert={this.handleAlert}/>
         </div>

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {returnErrors} from './errorActions'
+import {getAppointments, clearAppointments} from './appointmentActions'
 import {
   USER_LOADED,
   USER_LOADING,
@@ -11,17 +12,22 @@ import {
   REGISTER_FAIL
 } from '../actions/types'
 
-export const loadUser = () => (dispatch, getState) => {
+export const loadUser = (filterData) => (dispatch, getState) => {
   dispatch({type: USER_LOADING})
 
-  axios.get('/api/auth/user', tokenConfig(getState)).then(res => dispatch({
-    type: USER_LOADED,
-    payload: res.data
-  }))
-  .catch(err => {
-    dispatch(returnErrors(err.response.data, err.response.status))
-    dispatch({type: AUTH_ERROR})
-  }) 
+  axios.get('/api/auth/user', tokenConfig(getState))
+    .then(res => dispatch({type: USER_LOADED, payload: res.data}))
+    .then(userInfo => {
+      const filterUserData = {
+        ...filterData,
+        authorId: userInfo.payload._id
+      }
+      dispatch(getAppointments(filterUserData))
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status))
+      dispatch({type: AUTH_ERROR})
+    }) 
 }
 
 export const register = ({name, email, password}) => dispatch => {
@@ -42,7 +48,12 @@ export const register = ({name, email, password}) => dispatch => {
   })
 }
 
-export const login = ({email, password}) => dispatch => {
+export const login = ({email, password}) => (dispatch, getState) => {
+  const {calendarInfo} = getState()
+  const filterData = {
+    nextMonth: calendarInfo.initNextMonth,
+    prevMonth: calendarInfo.initPrevMonth
+  }
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -51,19 +62,27 @@ export const login = ({email, password}) => dispatch => {
 
   const body = JSON.stringify({email, password})
 
-  axios.post('/api/auth', body, config).then(res => {
-    dispatch({type: LOGIN_SUCCESS, payload: res.data})
-  })
-  .catch(err => {
-    dispatch(returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL'))
-    dispatch({type: LOGIN_FAIL})
-  })
+  axios.post('/api/auth', body, config)
+    .then(res => {
+      dispatch({type: LOGIN_SUCCESS, payload: res.data})
+    })
+    .then(userInfo => {
+      const {auth} = getState()
+      const filterUserData = {
+        ...filterData,
+        authorId: auth.user ? auth.user.id : ''
+      }
+      dispatch(getAppointments(filterUserData))
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL'))
+      dispatch({type: LOGIN_FAIL})
+    })
 }
 
-export const logout = () => {
-  return {
-    type: LOGOUT_SUCCESS
-  }
+export const logout = () => dispatch => {
+  dispatch(clearAppointments())
+  dispatch({type: LOGOUT_SUCCESS})
 }
 
 export const tokenConfig = getState => {
