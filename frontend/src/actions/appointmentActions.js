@@ -17,8 +17,7 @@ export const getAppointments = (filterData) => (dispatch, getState) => {
         prevMonth: filterData.prevMonth,
         authorId: filterData.authorId
       }
-    },
-    // tokenConfig(getState)
+    }
   )
     .then(res => dispatch({
       type: GET_APPOINTMENT,

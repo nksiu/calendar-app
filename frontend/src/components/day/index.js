@@ -60,13 +60,18 @@ const Day = ({dayInfo, handleAlert}) => {
           />
         }
       </DayTopWrapperSC>
-      <ListWrapperSC>
-        <List component='nav' aria-label='preview-appointment' className='root-list'>
-          {
-            appointments.map(appointment => (<Appointment key={uuidv4()} appointment={appointment}/>))
-          }
-        </List>
-      </ListWrapperSC>
+      {
+        !Object.is(screenWidth, NaN) ?
+          <ListWrapperSC>
+            <List component='nav' aria-label='preview-appointment' className='root-list'>
+              {
+                appointments.map(appointment => (<Appointment key={uuidv4()} appointment={appointment}/>))
+              }
+            </List>
+          </ListWrapperSC>
+        :
+        null
+      }
     </DayWrapperSC>
   )
 }
