@@ -1,11 +1,11 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const config = require('config')
 const app = express()
+require('dotenv').config()
 
 app.use(express.json())
 
-const db = config.get('mongoURI')
+const db = process.env.SERVER_KEY
 
 mongoose
     .connect(db, {useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
