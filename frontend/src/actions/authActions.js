@@ -9,7 +9,10 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  HIDE_APPOINTMENTS,
+  INITIALIZE_SETTINGS,
+  UPDATE_SETTINGS
 } from '../actions/types'
 
 export const loadUser = (filterData) => (dispatch, getState) => {
@@ -23,6 +26,7 @@ export const loadUser = (filterData) => (dispatch, getState) => {
         authorId: userInfo.payload._id
       }
       dispatch(getAppointments(filterUserData))
+      dispatch({type: INITIALIZE_SETTINGS, payload: userInfo.payload.settings})
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -30,14 +34,24 @@ export const loadUser = (filterData) => (dispatch, getState) => {
     }) 
 }
 
-export const register = ({name, email, password}) => dispatch => {
+export const register = ({name, email, password}) => (dispatch, getState) => {
+  const {auth} = getState()
   const config = {
     headers: {
       'Content-Type': 'application/json'
     }
   }
 
-  const body = JSON.stringify({name, email, password})
+  const body = JSON.stringify(
+    {
+      name,
+      email,
+      password,
+      settings: {
+        hideAppointments: auth.hideAppointments
+      }
+    }
+  )
 
   axios.post('/api/users', body, config).then(res => {
     dispatch({type: REGISTER_SUCCESS, payload: res.data})
@@ -65,6 +79,7 @@ export const login = ({email, password}) => (dispatch, getState) => {
   axios.post('/api/auth', body, config)
     .then(res => {
       dispatch({type: LOGIN_SUCCESS, payload: res.data})
+      dispatch({type: INITIALIZE_SETTINGS, payload: res.data.user.settings})
     })
     .then(userInfo => {
       const {auth} = getState()
@@ -83,6 +98,15 @@ export const login = ({email, password}) => (dispatch, getState) => {
 export const logout = () => dispatch => {
   dispatch(clearAppointments())
   dispatch({type: LOGOUT_SUCCESS})
+}
+
+export const updateSettings = (updatedSettings) => (dispatch, getState) => {
+  axios.put('/api/auth/user/settings', updatedSettings)
+    .then(res => dispatch({type: UPDATE_SETTINGS, payload: res.data}))
+}
+
+export const hideAppointments = () => dispatch => {
+  dispatch({type: HIDE_APPOINTMENTS})
 }
 
 export const tokenConfig = getState => {

@@ -5,11 +5,11 @@ import { connect } from 'react-redux'
 import {FormGroup, FormControlLabel, Switch} from '@material-ui/core'
 
 //Actions
-import {hideAppointments} from '../../../actions/settingsActions'
+import {hideAppointments} from '../../../actions/authActions'
 
-const SettingSwitches = ({hideAppointments, settings}) => {
+const SettingSwitches = ({hideAppointments, authInfo}) => {
   const [settingsForm, setSettings] = useState({
-    hideAppointment: settings.hideAppointments
+    hideAppointment: authInfo.hideAppointments
   })
 
   const handleChange = (event) => {
@@ -29,7 +29,7 @@ const SettingSwitches = ({hideAppointments, settings}) => {
 }
 
 const mapStateToProps = state => ({
-  settings: state.settings
+  authInfo: state.auth
 })
 
 export default connect(mapStateToProps, {hideAppointments})(SettingSwitches)
