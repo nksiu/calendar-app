@@ -68,7 +68,6 @@ export default function(state = initialState, action) {
       }
     
     case UPDATE_SETTINGS:
-      console.log(action.payload)
       return {
         ...state,
         hideAppointments: action.payload.settings.hide_appointments
