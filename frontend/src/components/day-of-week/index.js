@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import DayOfWeekWrapperSC from './day-of-week-sc'
+import {Typography} from '@material-ui/core'
 
 const WeekDay = ({weekDay}) => {
   const [windowSize, setWindowSize] = useState({width: undefined, height: undefined})
@@ -20,9 +21,9 @@ const WeekDay = ({weekDay}) => {
   return (
     <DayOfWeekWrapperSC weekDay={weekDay} screenWidth={screenWidth}>
         <div>
-          <p>
-          {weekDay}
-          </p>
+          <Typography>
+            {weekDay}
+          </Typography>
         </div>
     </DayOfWeekWrapperSC>
   )

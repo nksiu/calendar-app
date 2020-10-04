@@ -26,7 +26,10 @@ import AppointmentModalBodyWrapperSC from '../appointment-add-dialog/appointment
 import WeekWrapperSC from '../week-days/week-wrapper'
 import AlertWrapperSC from '../appointment-add-dialog/alert-wrapper-sc'
 
-const AppointmentUpdateDialog = ({handleAlert, updateAppointment, appointment, handleCloseOnUpdate}) => {
+//Functions
+import * as CalendarHelpers from '../../functions/calendar-helpers'
+
+const AppointmentUpdateDialog = ({handleAlert, updateAppointment, appointment, handleCloseOnUpdate, authInfo}) => {
   const [open, setOpen] = useState(false)
 
   const [formInfo, setFormInfo] = useState({
@@ -114,18 +117,24 @@ const AppointmentUpdateDialog = ({handleAlert, updateAppointment, appointment, h
     }
 
     else if (formInfo.isValidStartDate && formInfo.isValidEndDate) {
-      const updatedAppointment = {
-        appointmentId: appointment._id,
-        appointmentAuthor: 'default',
-        appointmentName: formInfo.titleText,
-        startDate: formInfo.startDate,
-        endDate: formInfo.endDate,
-        dateToQuery: formInfo.dateToQuery
+      const checkDates = CalendarHelpers.checkDatesVaildity(formInfo.startDate, formInfo.endDate)
+      if (!checkDates.res) {
+        setAlert({text: checkDates.msg, severity: 'error', shouldShow: true})
+        fadeAlert()
+      } else {
+        const updatedAppointment = {
+          appointmentId: appointment._id,
+          appointmentAuthor: authInfo.user._id,
+          appointmentName: formInfo.titleText,
+          startDate: formInfo.startDate,
+          endDate: formInfo.endDate,
+          dateToQuery: formInfo.dateToQuery
+        }
+        updateAppointment(updatedAppointment)
+        handleClose()
+        handleCloseOnUpdate()
+        handleAlert({text: 'Successfully updated appointment', severity: 'success', shouldShow: true})
       }
-      updateAppointment(updatedAppointment)
-      handleClose()
-      handleCloseOnUpdate()
-      handleAlert({text: 'Successfully updated appointment', severity: 'success', shouldShow: true})
     }else{
       setAlert({text: 'Invalid date or time provided', severity: 'error', shouldShow: true})
       fadeAlert()
@@ -244,4 +253,8 @@ const AppointmentUpdateDialog = ({handleAlert, updateAppointment, appointment, h
   )
 }
 
-export default connect(null, {updateAppointment})(AppointmentUpdateDialog)
+const mapStateToProps = state => ({
+  authInfo: state.auth
+})
+
+export default connect(mapStateToProps, {updateAppointment})(AppointmentUpdateDialog)
