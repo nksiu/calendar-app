@@ -33,7 +33,7 @@ const Day = ({dayInfo, handleAlert}) => {
   }, [])
 
   const screenWidth = windowSize.width/7
-  const {numOfDay, isSunday, isPartOfCurrentMonth, isToday, date, appointments} = dayInfo
+  const {numOfDay, isSunday, isPartOfCurrentMonth, isToday, date, appointments, bottomLeft, bottomRight} = dayInfo
 
   return (
     <DayWrapperSC 
@@ -41,6 +41,8 @@ const Day = ({dayInfo, handleAlert}) => {
       isPartOfCurrentMonth={isPartOfCurrentMonth} 
       isToday={isToday} 
       screenWidth={screenWidth}
+      bottomLeft={bottomLeft}
+      bottomRight={bottomRight}
       onMouseEnter={() => setIsShown(true)}
       onMouseLeave={() => setIsShown(false)}
       className='day-comp'

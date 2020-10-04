@@ -108,6 +108,9 @@ export const createMonthMap = (yearAndMonth, prevMonth, nextMonth, currentDate, 
     }
     if (dayCounter === 7) {
       if(!week[0].isPartOfCurrentMonth && month.length) {
+        const monthLength = month.length - 1
+        month[monthLength][0]['bottomLeft'] = true
+        month[monthLength][6]['bottomRight'] = true
         return month
       }
       month.push(week)
@@ -128,13 +131,17 @@ export const createMonthMap = (yearAndMonth, prevMonth, nextMonth, currentDate, 
       isSunday: dayCounter === 0,
       date: dateInLoop,
       isToday: currentDate === dateInLoop,
-      appointments: appointmentsForDay
+      appointments: appointmentsForDay,
+      bottomLeft: false,
+      bottomRight: false
     })
 
     currentDay++
     dayCounter++
   }
-
+  const monthLength = month.length - 1
+  month[monthLength][0]['bottomLeft'] = true
+  month[monthLength][6]['bottomRight'] = true
   return month
 }
 

@@ -20,9 +20,10 @@ export default function(state = initialState, action) {
         loading: false
       }
     case ADD_APPOINTMENT:
+      let tmpAddAppointments = [action.payload, ...state.appointments]
       return {
         ...state,
-        appointments: [action.payload, ...state.appointments]
+        appointments: tmpAddAppointments.sort((start, end) => new Date(start.start_date) - new Date(end.start_date))
       }
     case DELETE_APPOINTMENT:
       return {
