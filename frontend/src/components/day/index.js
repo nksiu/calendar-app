@@ -11,7 +11,7 @@ import DayTopWrapperSC from './day-top-wrapper-sc'
 import ListWrapperSC from './list-wrapper-sc'
 
 //Material UI
-import {List} from '@material-ui/core'
+import {List, Typography} from '@material-ui/core'
 
 const Day = ({dayInfo, handleAlert}) => {
   const [windowSize, setWindowSize] = useState({width: undefined, height: undefined})
@@ -49,9 +49,9 @@ const Day = ({dayInfo, handleAlert}) => {
     >
       <DayTopWrapperSC>
         <div className='circle'>
-          <p>
+          <Typography>
             {numOfDay ? numOfDay : ''}
-          </p>
+          </Typography>
         </div>
         { isShown && 
           <OverviewDialog 

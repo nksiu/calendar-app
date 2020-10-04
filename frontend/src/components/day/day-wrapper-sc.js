@@ -14,21 +14,20 @@ const DayWrapperSC = styled.div`
     display: block;
     height: 30px;
     width: 30px;
-    line-height: 30px;
 
     -moz-border-radius: 15px;
     border-radius: 15px;
     background-color: ${props => (props.isToday ? 'lightskyblue' : 'none')};
-    margin-top: 2%;
+    margin-top: 3%;
     margin-left: 2%;
     text-align: center;
   }
   
   p {
     color: ${props => (props.isPartOfCurrentMonth ? 'black' : 'grey')};
+    font-size: 15px;
     vertical-align: top;
-    margin-top: 2%;
-    margin-left: 2%;
+    margin-top: 14%;
   }
 `
 

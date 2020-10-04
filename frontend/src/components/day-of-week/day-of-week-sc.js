@@ -8,10 +8,6 @@ const DayOfWeekWrapperSC = styled.div`
   text-align: center;
   background-color: white;
   border-radius: ${props => (props.weekDay === "Sun" ? "10px 0px 0px 0px" : props.weekDay === "Sat" ? "0px 10px 0px 0px" : "0px 0px 0px 0px")};
-  
-  p {
-    color: black;
-  }
 `
 
 export default DayOfWeekWrapperSC
