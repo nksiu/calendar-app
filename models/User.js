@@ -18,6 +18,12 @@ const UserSchema = new Schema({
   register_date: {
     type: Date,
     default: Date.now
+  },
+  settings: {
+    hide_appointments: {
+      type: Boolean,
+      required: true
+    }
   }
 })
 

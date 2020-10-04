@@ -9,7 +9,7 @@ import {
   ListItem
 } from '@material-ui/core'
 
-const Appointment = ({appointment, settings}) => {
+const Appointment = ({appointment, authInfo}) => {
   const elementWidth = document.getElementsByClassName('day-comp')[0].clientWidth
   const [dynamicWidth, setAppointmentWidth] = useState(elementWidth)
 
@@ -35,7 +35,7 @@ const Appointment = ({appointment, settings}) => {
   return (
     <Fragment>
       {
-        settings.hideAppointments ?
+        authInfo.hideAppointments ?
           null
         :
           <AppointmentWrapperSC appointmentWidth={dynamicWidth}>
@@ -49,7 +49,7 @@ const Appointment = ({appointment, settings}) => {
 }
 
 const mapStateToProps = state => ({
-  settings: state.settings
+  authInfo: state.auth
 })
 
 export default connect(mapStateToProps, null)(Appointment)

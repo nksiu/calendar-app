@@ -8,7 +8,7 @@ const User = require('../../models/User')
 // @route POST api/users
 // @desc Register new user
 router.post('/', (req, res) => {
-  const {name, email, password} = req.body
+  const {name, email, password, settings} = req.body
 
   if(!name || !email || !password) {
     return res.status(400).json({msg: 'Please enter all fields'})
@@ -22,7 +22,10 @@ router.post('/', (req, res) => {
     const newUser = new User({
       name,
       email,
-      password
+      password,
+      settings: {
+        hide_appointments: settings.hideAppointments
+      }
     })
 
     bcrypt.genSalt(10, (err, salt) => {

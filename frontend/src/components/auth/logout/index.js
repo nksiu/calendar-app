@@ -6,11 +6,16 @@ import {ListItem, ListItemIcon, ListItemText, Typography} from '@material-ui/cor
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
 //Actions
-import {logout} from '../../../actions/authActions'
+import {logout, updateSettings} from '../../../actions/authActions'
 
-const Logout = ({logout, authInfo, handleButtonClose}) => {
+const Logout = ({logout, authInfo, handleButtonClose, updateSettings}) => {
   const {isAuthenticated} = authInfo
   const handleClick = () => {
+    const updatedSettings = {
+      userId: localStorage.getItem('userId'),
+      hideAppointments: authInfo.hideAppointments
+    }
+    updateSettings(updatedSettings)
     logout()
     handleButtonClose()
   }
@@ -35,4 +40,4 @@ const mapStateToProps = state => ({
   authInfo: state.auth
 })
 
-export default connect(mapStateToProps, {logout})(Logout)
+export default connect(mapStateToProps, {logout, updateSettings})(Logout)
