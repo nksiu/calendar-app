@@ -114,7 +114,7 @@ const AppointmentAddDialog = ({handleButtonClose, handleAlert, addAppointment, c
       fadeAlert()
     }
 
-    else if(formInfo.titleText.length > 60) {
+    else if (formInfo.titleText.length > 60) {
       setAlert({text: 'Title cannot be longer than 60 characters', severity: 'error', shouldShow: true})
       setFormInfo({
         ...formInfo,
@@ -122,22 +122,23 @@ const AppointmentAddDialog = ({handleButtonClose, handleAlert, addAppointment, c
       })
     }
 
-    else if (JSON.stringify(formInfo.startDate) === JSON.stringify(formInfo.endDate)) {
-      setAlert({text: 'The date and time are the same', severity: 'error', shouldShow: true})
-      fadeAlert()
-    }
-
     else if (formInfo.isValidStartDate && formInfo.isValidEndDate) {
-      const newAppointment = {
-        appointmentAuthor: user._id,
-        appointmentName: formInfo.titleText,
-        startDate: formInfo.startDate,
-        endDate: formInfo.endDate,
-        dateToQuery: formInfo.dateToQuery
+      const checkDates = CalendarHelpers.checkDatesVaildity(formInfo.startDate, formInfo.endDate)
+      if (!checkDates.res) {
+        setAlert({text: checkDates.msg, severity: 'error', shouldShow: true})
+        fadeAlert()
+      } else {
+        const newAppointment = {
+          appointmentAuthor: user._id,
+          appointmentName: formInfo.titleText,
+          startDate: formInfo.startDate,
+          endDate: formInfo.endDate,
+          dateToQuery: formInfo.dateToQuery
+        }
+        addAppointment(newAppointment)
+        handleClose()
+        handleAlert({text: 'Successfully created appointment', severity: 'success', shouldShow: true})
       }
-      addAppointment(newAppointment)
-      handleClose()
-      handleAlert({text: 'Successfully created appointment', severity: 'success', shouldShow: true})
     }else{
       setAlert({text: 'Invalid date or time provided', severity: 'error', shouldShow: true})
       fadeAlert()

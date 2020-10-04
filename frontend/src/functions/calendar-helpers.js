@@ -137,3 +137,13 @@ export const createMonthMap = (yearAndMonth, prevMonth, nextMonth, currentDate, 
 
   return month
 }
+
+export const checkDatesVaildity = (startDate, endDate) => {
+  if (startDate.getTime() === endDate.getTime()) {
+    return {res: false, msg: 'The date and time cannot be the same'}
+  }
+  if (startDate.getTime() > endDate.getTime()) {
+    return {res: false, msg: 'Start Date cannot come after End Date'}
+  }
+  return {res: true, msg: ''}
+}
